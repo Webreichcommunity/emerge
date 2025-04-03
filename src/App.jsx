@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Layout from "./Layout";
+import Home from "./Pages/Home/Home";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -19,7 +20,9 @@ function App() {
         <SplashScreen />
       ) : (
         <Routes>
-          <Route path="/" element={<Layout />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+          </Route>
         </Routes>
       )}
     </Router>
@@ -31,9 +34,9 @@ function SplashScreen() {
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 z-50 backdrop-blur-sm">
       <div className="text-center">
         <div className="relative mb-4 animate-[pulse_2s_ease-in-out_infinite]">
-          <img 
-            src="/logo.png" 
-            alt="Emerge Construction Logo" 
+          <img
+            src="/logo.png"
+            alt="Emerge Construction Logo"
             className="w-48 h-48 mx-auto"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-stone-500 to-gray-300 mix-blend-overlay rounded-full animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite] opacity-50"></div>
