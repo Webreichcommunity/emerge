@@ -11,17 +11,15 @@ const menuItems = [
         name: "Services",
         href: "/services",
         submenu: [
-            { name: "Architectural Design", href: "/ourwork/architecturaldesign" },
-            { name: "Residential Construction", href: "/ourwork/residentialconstruction" },
-            { name: "Commercial Building Construction", href: "/ourwork/commercialconstruction" },
-            { name: "Road & Highway Development", href: "/ourwork/roaddevelopment" },
-            { name: "Bridge & Flyover Construction", href: "/ourwork/bridgeconstruction" },
-            { name: "Industrial Infrastructure Development", href: "/ourwork/industrialinfrastructure" },
-            { name: "Renovation & Remodeling", href: "/ourwork/renovationremodeling" },
-            { name: "Landscaping & Urban Planning", href: "/ourwork/landscapingurbanplanning" },
-            { name: "Water Supply & Drainage Systems", href: "/ourwork/watersupplydrainage" }
+            { name: "Planning", href: "/services/planning" },
+            { name: "Sanctioning", href: "/services/sanctioning" },
+            { name: "Building Construction", href: "/services/buildingconstruction" },
+            { name: "3D Modeling", href: "/services/3dmodeling" },
+            { name: "Interior Designing", href: "/services/interiordesigning" },
+            { name: "Renovation", href: "/services/renovation" },
+            { name: "Estimation", href: "/services/estimation" },
+            { name: "Land Sub-division", href: "/services/landsubdivision" }
         ]
-
     },
     {
         name: "Our Work",
