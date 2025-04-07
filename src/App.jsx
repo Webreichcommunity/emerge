@@ -2,6 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Layout from "./Layout";
 import Home from "./Pages/Home/Home";
+import ProjectDetail from "./Pages/OurProjectDetails/OurProjectDetails";
+import Projects from "./Pages/Projects/Projects";
+import Services from "./Pages/Services/Services";
+// import OurProjectDetails from "./Pages/OurProjectDetails/OurProjectDetails";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -22,6 +26,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="services" element={<Services />} />
+            <Route path="ourwork" element={<Projects />} />
+            <Route path="ourwork/:slug" element={<ProjectDetail />} />
           </Route>
         </Routes>
       )}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+
 // Updated service data with new color scheme
 const servicesData = [
   {
@@ -13,49 +14,49 @@ const servicesData = [
   {
     title: "Sanctioning",
     description: "Expert guidance through approval processes",
-    image: "/api/placeholder/400/320", // Replace with actual image URL in production
+    image: "https://images.pexels.com/photos/31430679/pexels-photo-31430679/free-photo-of-modern-indoor-wooden-staircase-with-glass-rail.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Replace with actual image URL in production
     longDescription: "We navigate complex approval processes with regulatory bodies, ensuring all permits and sanctions are obtained efficiently and correctly, saving you time and preventing costly delays.",
     color: "from-stone-800 to-gray-800"
   },
   {
     title: "Building Construction",
     description: "End-to-end construction management",
-    image: "/api/placeholder/400/320", // Replace with actual image URL in production
+    image: "https://images.pexels.com/photos/1451416/pexels-photo-1451416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Replace with actual image URL in production
     longDescription: "From groundbreaking to final inspections, our construction services deliver quality craftsmanship, adherence to timelines, and transparent communication throughout the entire build process.",
     color: "from-stone-900 to-gray-900"
   },
   {
     title: "3D Modeling",
     description: "Realistic 3D visualizations of your project",
-    image: "/api/placeholder/400/320", // Replace with actual image URL in production
+    image: "https://images.pexels.com/photos/15764116/pexels-photo-15764116/free-photo-of-architect-working-on-a-computer.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Replace with actual image URL in production
     longDescription: "Our advanced 3D modeling creates photorealistic renderings and walkthroughs of your project, allowing you to visualize and refine your space before construction begins.",
     color: "from-stone-800 to-gray-800"
   },
   {
     title: "Interior Designing",
     description: "Stylish and functional interior solutions",
-    image: "/api/placeholder/400/320", // Replace with actual image URL in production
+    image: "https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Replace with actual image URL in production
     longDescription: "Our interior design team creates spaces that balance aesthetics with functionality, incorporating your personal style while optimizing flow, lighting, and spatial relationships.",
     color: "from-stone-900 to-gray-900"
   },
   {
     title: "Renovation",
     description: "Transforming existing spaces with precision",
-    image: "/api/placeholder/400/320", // Replace with actual image URL in production
+    image: "https://images.pexels.com/photos/3990359/pexels-photo-3990359.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Replace with actual image URL in production
     longDescription: "We breathe new life into existing structures through careful renovation that preserves character while updating functionality, efficiency, and appearance to modern standards.",
     color: "from-stone-800 to-gray-800"
   },
   {
     title: "Estimation",
     description: "Accurate cost projections and budgeting",
-    image: "/api/placeholder/400/320", // Replace with actual image URL in production
+    image: "https://images.pexels.com/photos/8488033/pexels-photo-8488033.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Replace with actual image URL in production
     longDescription: "Our detailed estimation services provide comprehensive cost breakdowns, helping you plan financially with confidence and avoid unexpected expenses during your project.",
     color: "from-stone-900 to-gray-900"
   },
   {
     title: "Land Sub-division",
     description: "Professional land division services",
-    image: "/api/placeholder/400/320", // Replace with actual image URL in production
+    image: "https://images.pexels.com/photos/8082328/pexels-photo-8082328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", // Replace with actual image URL in production
     longDescription: "We handle the complexities of land subdivision, including surveys, legal requirements, infrastructure planning, and coordination with local authorities to maximize land value and utility.",
     color: "from-stone-800 to-gray-800"
   }
@@ -147,7 +148,7 @@ const Services = () => {
           className="text-center mb-10"
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-stone-300 to-gray-100"
+            className="text-3xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 py-2 text-transparent bg-clip-text bg-gradient-to-r from-stone-300 via-gray-200 to-stone-300 bg-[length:200%_auto] animate-gradient-shift"
             animate={{ 
               backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] 
             }}
