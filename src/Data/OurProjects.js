@@ -9,7 +9,7 @@ export const ourProjects = [
         "date": "2023",
         "category": "Technology",
         "tags": ["Commercial", "Innovation", "Tech"],
-        "mainImage": "/techhub.jpg",
+        "mainImage": "https://images.pexels.com/photos/5506051/pexels-photo-5506051.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         "website": "#",
         "gallery": [
             "/techhub-1.jpg",
@@ -32,7 +32,7 @@ export const ourProjects = [
         "date": "2022-2024",
         "category": "Residential",
         "tags": ["Luxury", "Residential", "Beachfront"],
-        "mainImage": "/oceanview.jpg",
+        "mainImage": "https://images.pexels.com/photos/276592/pexels-photo-276592.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         "website": "#",
         "gallery": [
             "/oceanview-1.jpg",
@@ -55,7 +55,7 @@ export const ourProjects = [
         "date": "2022-2024",
         "category": "Commercial",
         "tags": ["Sustainable", "Corporate", "LEED"],
-        "mainImage": "/greenfield.jpg",
+        "mainImage": "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         "website": "#",
         "gallery": [
             "/greenfield-1.jpg",
@@ -78,7 +78,7 @@ export const ourProjects = [
         "date": "2021-2023",
         "category": "Cultural",
         "tags": ["Restoration", "Cultural", "Historic"],
-        "mainImage": "/museum.jpg",
+        "mainImage": "https://images.pexels.com/photos/208636/pexels-photo-208636.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         "website": "#",
         "gallery": [
             "/museum-1.jpg",
@@ -101,7 +101,7 @@ export const ourProjects = [
         "date": "2023-2025",
         "category": "Healthcare",
         "tags": ["Healthcare", "Wellness", "Patient-Centered"],
-        "mainImage": "/wellness.jpg",
+        "mainImage": "https://images.pexels.com/photos/15857058/pexels-photo-15857058/free-photo-of-stove-and-benches-in-sauna.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
         "website": "#",
         "gallery": [
             "/wellness-1.jpg",

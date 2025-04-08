@@ -1,51 +1,77 @@
-import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, Search } from "lucide-react";
 
 const menuItems = [
     {
         name: "Home",
-        href: "/"
+        href: "/#home"  // Added hash link
     },
     {
         name: "Services",
-        href: "/services",
+        href: "#services",  // Added hash
         submenu: [
-            { name: "Planning", href: "/services/planning" },
-            { name: "Sanctioning", href: "/services/sanctioning" },
-            { name: "Building Construction", href: "/services/buildingconstruction" },
-            { name: "3D Modeling", href: "/services/3dmodeling" },
-            { name: "Interior Designing", href: "/services/interiordesigning" },
-            { name: "Renovation", href: "/services/renovation" },
-            { name: "Estimation", href: "/services/estimation" },
-            { name: "Land Sub-division", href: "/services/landsubdivision" }
+            { name: "Planning", href: "/services#planning" },
+            { name: "Sanctioning", href: "/services#sanctioning" },
+            { name: "Building Construction", href: "/services#buildingconstruction" },
+            { name: "3D Modeling", href: "/services#3dmodeling" },
+            { name: "Interior Designing", href: "/services#interiordesigning" },
+            { name: "Renovation", href: "/services#renovation" },
+            { name: "Estimation", href: "/services#estimation" },
+            { name: "Land Sub-division", href: "/services#landsubdivision" }
         ]
     },
     {
         name: "Our Work",
-        href: "/ourwork",
+        href: "#projects",
         submenu: [
-            { name: "Skyline Towers", href: "/ourwork/skylinetowers" },
-            { name: "Greenfield Residences", href: "/ourwork/greenfieldresidences" },
-            { name: "Metro Bridge Project", href: "/ourwork/metrobridgeproject" },
-            { name: "Sunrise Commercial Complex", href: "/ourwork/sunrisecommercial" },
-            { name: "Elite Villas", href: "/ourwork/elitevillas" },
-            { name: "Urban Road Development", href: "/ourwork/urbanroaddevelopment" },
-            { name: "Blue Ridge Apartments", href: "/ourwork/blueridgeapartments" },
-            { name: "Grand Central Mall", href: "/ourwork/grandcentralmall" },
-            { name: "Evergreen Township", href: "/ourwork/evergreentownship" }
+            { name: "Skyline Towers", href: "/ourwork#skylinetowers" },
+            { name: "Greenfield Residences", href: "/ourwork#greenfieldresidences" },
+            { name: "Metro Bridge Project", href: "/ourwork#metrobridgeproject" },
+            { name: "Sunrise Commercial Complex", href: "/ourwork#sunrisecommercial" },
+            { name: "Elite Villas", href: "/ourwork#elitevillas" },
+            { name: "Urban Road Development", href: "/ourwork#urbanroaddevelopment" },
+            { name: "Blue Ridge Apartments", href: "/ourwork#blueridgeapartments" },
+            { name: "Grand Central Mall", href: "/ourwork#grandcentralmall" },
+            { name: "Evergreen Township", href: "/ourwork#evergreentownship" }
         ]
     },
-    { name: "About Us", href: "/about" },
+    { name: "About Us", href: "/about#top" },
 ];
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSubmenu, setActiveSubmenu] = useState(null);
+    const location = useLocation();
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
         setActiveSubmenu(null);
+    };
+
+    // Smooth scroll to hash element when URL changes
+    useEffect(() => {
+        const hash = window.location.hash;
+        if (hash) {
+            const element = document.getElementById(hash.substring(1));
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    }, [location]);
+
+    const handleHashClick = (e, href) => {
+        // If it's a hash link on the same page
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const element = document.getElementById(href.substring(1));
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                window.history.pushState(null, '', `#${href.substring(1)}`);
+            }
+        }
+        // Close mobile menu after click
+        setIsMenuOpen(false);
     };
 
     return (
@@ -69,6 +95,7 @@ export default function Header() {
                             <div key={item.name} className="relative group">
                                 <NavLink
                                     to={item.href}
+                                    onClick={(e) => handleHashClick(e, item.href)}
                                     className={({ isActive }) =>
                                         `flex items-center space-x-1 px-1 py-2 text-base font-medium transition-colors
                                     ${isActive ? "text-gray-300 font-semibold" : "text-stone-500 hover:text-gray-300"}`
@@ -84,6 +111,7 @@ export default function Header() {
                                             <NavLink
                                                 key={subitem.name}
                                                 to={subitem.href}
+                                                onClick={(e) => handleHashClick(e, subitem.href)}
                                                 className={({ isActive }) =>
                                                     `block px-4 py-2 text-sm text-stone-500 hover:bg-stone-800 hover:text-gray-300
                                                 ${isActive ? "text-gray-300 bg-stone-800" : ""}`
@@ -152,7 +180,11 @@ export default function Header() {
                                     className="flex items-center justify-between text-gray-300 hover:text-stone-500 cursor-pointer transition-colors"
                                     onClick={() => setActiveSubmenu(activeSubmenu === item.name ? null : item.name)}
                                 >
-                                    <Link to={item.href} className="w-full">
+                                    <Link 
+                                        to={item.href} 
+                                        className="w-full"
+                                        onClick={(e) => handleHashClick(e, item.href)}
+                                    >
                                         <span className="text-base font-medium">{item.name}</span>
                                     </Link>
                                     {item.submenu && (
@@ -166,10 +198,10 @@ export default function Header() {
                                             <NavLink
                                                 key={subitem.name}
                                                 to={subitem.href}
+                                                onClick={(e) => handleHashClick(e, subitem.href)}
                                                 className={({ isActive }) =>
                                                     `block py-2 text-sm ${isActive ? "text-gray-300 font-medium" : "text-stone-500 hover:text-gray-300"}`
                                                 }
-                                                onClick={toggleMenu}
                                             >
                                                 {subitem.name}
                                             </NavLink>

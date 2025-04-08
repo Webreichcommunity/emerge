@@ -5,6 +5,7 @@ import { BadgeIndianRupee, Clock, Star, Users } from 'lucide-react';
 import Services from '../Services/Services';
 import Stats from '../Stats/Stats';
 import Projects from '../Projects/Projects';
+import Contactform from '../ContactUs/ContactUs';
 
 const services = [
   {
@@ -463,9 +464,10 @@ const Home = () => {
 
 
       </section>
-      <Stats />
-      <Services />
-      <Projects/>
+      <Stats id="stats" />
+      <Services id="services" />
+      <Projects id="project" />
+      <Contactform />
     </div>
   );
 };
