@@ -69,8 +69,8 @@ const Stats = () => {
     // Pulsing animation for chakra points
     const pulseVariants = {
         pulse: {
-            scale: [1, 1.1, 1],
-            opacity: [0.7, 1, 0.7],
+            scale: [1, 1.2, 1],
+            opacity: [0.8, 1, 0.8],
             transition: {
                 duration: 2,
                 repeat: Infinity,
@@ -84,130 +84,191 @@ const Stats = () => {
             value: "35K+",
             label: "Total Square Foot Completed",
             description: "Vastu-compliant construction delivered",
-            icon: <FaRuler className="text-2xl sm:text-3xl text-amber-400" />
+            icon: <FaRuler className="text-2xl sm:text-3xl" />
         },
         {
             value: "10+",
             label: "Ongoing Projects",
             description: "Currently under development",
-            icon: <FiHome className="text-2xl sm:text-3xl text-amber-400" />
+            icon: <FiHome className="text-2xl sm:text-3xl" />
         },
         {
             value: "20+",
             label: "Completed Projects",
             description: "Successfully delivered",
-            icon: <FiCheckCircle className="text-2xl sm:text-3xl text-amber-400" />
+            icon: <FiCheckCircle className="text-2xl sm:text-3xl" />
         },
         {
             value: "100%",
             label: "Vastu Compliant",
             description: "All designs follow Vastu principles",
-            icon: <FiCompass className="text-2xl sm:text-3xl text-amber-400" />
+            icon: <FiCompass className="text-2xl sm:text-3xl" />
         },
     ];
 
     return (
-        <div className="bg-black text-stone-200 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
-                {/* Vastu Chakra Section */}
+        <div className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden text-gray-900" style={{
+            background: `
+              radial-gradient(circle at 70% 80%, rgba(255,165,0,0.5) 0%, transparent 25%),
+              linear-gradient(135deg, #ffffff 0%, #fff0f5 50%, #ffebcd 100%)
+            `
+          }}>
+            {/* Background decorative elements */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute -left-20 -top-20 w-64 h-64 bg-gradient-to-r from-amber-100 to-amber-50 rounded-full opacity-20 blur-3xl"></div>
+                <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-gradient-to-r from-blue-100 to-blue-50 rounded-full opacity-20 blur-3xl"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-64 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full opacity-10 blur-3xl"></div>
+            </div>
+
+            <div className="max-w-7xl mx-auto relative z-10">
+                {/* Title Section */}
                 <motion.div
                     ref={ref}
                     initial="hidden"
                     animate={inView ? "visible" : "hidden"}
                     variants={containerVariants}
-                    className="flex flex-col items-center mb-16 sm:mb-20"
+                    className="text-center mb-12 lg:mb-16"
                 >
                     <motion.h2
                         variants={itemVariants}
-                        className="text-3xl md:text-3xl lg:text-4xl font-bold text-center mb-8 md:mb-12 py-2 text-transparent bg-clip-text bg-gradient-to-r from-stone-300 via-gray-200 to-stone-300 bg-[length:200%_auto] animate-gradient-shift"
+                        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900"
                     >
                         Vastu-Compliant Design & Construction
                     </motion.h2>
-
                     <motion.p
                         variants={itemVariants}
-                        className="text-sm sm:text-base text-amber-100 mb-12 text-center max-w-3xl"
+                        className="text-lg text-gray-600 max-w-3xl mx-auto"
                     >
                         Harmonizing spaces with ancient Vastu principles for prosperity and well-being
                     </motion.p>
+                </motion.div>
 
-                    <div className="relative w-full flex justify-center">
-                        <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{
-                                duration: 120,
-                                repeat: Infinity,
-                                ease: "linear",
-                            }}
-                            className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 mb-10"
-                        >
-                            {/* Background Circle with subtle pattern */}
-                            <div className="absolute inset-0 rounded-full bg-gray-900 border border-gray-800 shadow-lg" style={{
-                                backgroundImage: `radial-gradient(circle at center, rgba(251, 191, 36, 0.05) 0%, transparent 70%)`
-                            }}></div>
-
-                            {/* Inner decorative rings */}
-                            <div className="absolute inset-3 sm:inset-4 rounded-full border border-amber-900/30"></div>
-                            <div className="absolute inset-6 sm:inset-8 rounded-full border border-amber-800/20"></div>
-
-                            {/* Center Dot with pulsing animation */}
+                {/* Main Content - Desktop Layout */}
+                <div className="hidden lg:flex flex-row items-center justify-between gap-12">
+                    {/* Left Side - Stats Cards */}
+                    <motion.div
+                        initial="hidden"
+                        animate={inView ? "visible" : "hidden"}
+                        variants={containerVariants}
+                        className="w-1/2 grid grid-cols-2 gap-6"
+                    >
+                        {stats.map((stat, index) => (
                             <motion.div
-                                className="absolute top-1/2 left-1/2 w-6 h-6 sm:w-8 sm:h-8 -mt-3 sm:-mt-4 -ml-3 sm:-ml-4 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 shadow-lg shadow-amber-500/20 z-20"
-                                variants={pulseVariants}
-                                animate="pulse"
-                            ></motion.div>
+                                key={index}
+                                variants={itemVariants}
+                                whileHover={{
+                                    y: -5,
+                                    boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+                                }}
+                                className={`
+                                    bg-white p-6 rounded-xl shadow-md
+                                    border border-gray-200 group
+                                    transition-all duration-300
+                                    hover:border-amber-300 hover:shadow-lg
+                                    ${index < 2 ? 'mb-6' : ''}
+                                `}
+                            >
+                                <div className="relative z-10">
+                                    <div className="mb-4 flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 group-hover:bg-amber-200 transition-colors duration-300">
+                                        {React.cloneElement(stat.icon, {
+                                            className: `${stat.icon.props.className} text-amber-600 group-hover:text-amber-700`
+                                        })}
+                                    </div>
 
-                            {/* Directions */}
-                            {vastuDirections.map((direction) => (
-                                <div key={direction.id}>
-                                    <motion.div
-                                        onMouseEnter={() => !isMobile && setHoverDirection(direction.id)}
-                                        onMouseLeave={() => !isMobile && setHoverDirection(null)}
-                                        onTouchStart={() => isMobile && setHoverDirection(direction.id)}
-                                        onTouchEnd={() => isMobile && setHoverDirection(null)}
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        transition={{ delay: 0.5 }}
-                                        className="absolute top-1/2 left-1/2 w-40 h-1 origin-left"
-                                        style={{ transform: `rotate(${direction.angle}deg)` }}
-                                    >
-                                        <div
-                                            className="absolute right-0 w-24 sm:w-32 h-0.5 transition-all duration-300"
-                                            style={{
-                                                background: `linear-gradient(to right, transparent, ${direction.color})`,
-                                                opacity: hoverDirection === direction.id ? 1 : 0.7,
-                                                height: hoverDirection === direction.id ? '2px' : '1px'
-                                            }}
-                                        ></div>
-
-                                        <motion.div
-                                            className="absolute right-0 w-3 h-3 sm:w-4 sm:h-4 rounded-full -mt-1.5 sm:-mt-2 flex items-center justify-center"
-                                            style={{ backgroundColor: direction.color }}
-                                            variants={pulseVariants}
-                                            animate="pulse"
-                                        >
-                                            {direction.icon}
-                                        </motion.div>
-
-                                        <div
-                                            className={`absolute right-0 -mt-8 sm:-mt-10 text-xs sm:text-sm font-medium text-center w-24 sm:w-32 transition-all duration-300`}
-                                            style={{
-                                                color: direction.color,
-                                                transform: `rotate(-${direction.angle}deg)`,
-                                                opacity: hoverDirection === direction.id ? 1 : 0.8,
-                                                fontWeight: hoverDirection === direction.id ? 'bold' : 'normal'
-                                            }}
-                                        >
-                                            <div className="whitespace-nowrap">{direction.name}</div>
-                                            <div className="text-[0.65rem] sm:text-xs opacity-80 mt-0.5">{direction.element} {direction.icon}</div>
-                                        </div>
-                                    </motion.div>
+                                    <h3 className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
+                                        {stat.value}
+                                    </h3>
+                                    <p className="text-lg font-medium text-gray-800 mb-2 leading-tight">
+                                        {stat.label}
+                                    </p>
+                                    <p className="text-sm text-gray-600 leading-snug">
+                                        {stat.description}
+                                    </p>
                                 </div>
-                            ))}
-                        </motion.div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
 
-                        {/* Outer rotating ring - only show on larger screens */}
-                        {!isMobile && (
+                    {/* Right Side - Vastu Chakra */}
+                    <motion.div
+                        initial="hidden"
+                        animate={inView ? "visible" : "hidden"}
+                        variants={containerVariants}
+                        className="w-1/2 flex justify-center"
+                    >
+                        <div className="relative w-full max-w-md">
+                            {/* Main Chakra */}
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{
+                                    duration: 120,
+                                    repeat: Infinity,
+                                    ease: "linear",
+                                }}
+                                className="relative w-full aspect-square"
+                            >
+                                {/* Background Circle with subtle pattern */}
+                                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 shadow-lg"></div>
+
+                                {/* Inner decorative rings */}
+                                <div className="absolute inset-4 rounded-full border-2 border-amber-300/30"></div>
+                                <div className="absolute inset-8 rounded-full border border-amber-400/20"></div>
+
+                                {/* Center Dot with pulsing animation */}
+                                <motion.div
+                                    className="absolute top-1/2 left-1/2 w-8 h-8 -mt-4 -ml-4 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 shadow-lg shadow-amber-500/30 z-20"
+                                    variants={pulseVariants}
+                                    animate="pulse"
+                                ></motion.div>
+
+                                {/* Directions */}
+                                {vastuDirections.map((direction) => (
+                                    <div key={direction.id}>
+                                        <motion.div
+                                            onMouseEnter={() => setHoverDirection(direction.id)}
+                                            onMouseLeave={() => setHoverDirection(null)}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ delay: 0.5 }}
+                                            className="absolute top-1/2 left-1/2 w-1/2 h-1 origin-left"
+                                            style={{ transform: `rotate(${direction.angle}deg)` }}
+                                        >
+                                            <div
+                                                className="absolute right-0 w-1/2 h-1 transition-all duration-300"
+                                                style={{
+                                                    background: `linear-gradient(to right, transparent, ${direction.color})`,
+                                                    opacity: hoverDirection === direction.id ? 1 : 0.7,
+                                                    height: hoverDirection === direction.id ? '3px' : '2px'
+                                                }}
+                                            ></div>
+
+                                            <motion.div
+                                                className="absolute right-0 w-5 h-5 rounded-full -mt-2 flex items-center justify-center shadow-md"
+                                                style={{ backgroundColor: direction.color }}
+                                                variants={pulseVariants}
+                                                animate={hoverDirection === direction.id ? "pulse" : "pulse"}
+                                            >
+                                                {direction.icon}
+                                            </motion.div>
+
+                                            <div
+                                                className={`absolute right-0 -mt-12 text-sm font-medium text-center w-32 transition-all duration-300`}
+                                                style={{
+                                                    color: direction.color,
+                                                    transform: `rotate(-${direction.angle}deg)`,
+                                                    opacity: hoverDirection === direction.id ? 1 : 0.8,
+                                                    fontWeight: hoverDirection === direction.id ? 'bold' : 'normal'
+                                                }}
+                                            >
+                                                <div className="whitespace-nowrap">{direction.name}</div>
+                                                <div className="text-xs opacity-80 mt-1">{direction.element} {direction.icon}</div>
+                                            </div>
+                                        </motion.div>
+                                    </div>
+                                ))}
+                            </motion.div>
+
+                            {/* Outer rotating ring */}
                             <motion.div
                                 animate={{ rotate: -180 }}
                                 transition={{
@@ -215,72 +276,129 @@ const Stats = () => {
                                     repeat: Infinity,
                                     ease: "linear",
                                 }}
-                                className="absolute inset-0 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full border border-amber-900/30 pointer-events-none"
+                                className="absolute inset-0 rounded-full border-2 border-amber-300/20 pointer-events-none"
                                 style={{
-                                    backgroundImage: `repeating-conic-gradient(from 0deg, transparent 0deg 30deg, rgba(251, 191, 36, 0.02) 30deg 60deg)`
+                                    backgroundImage: `repeating-conic-gradient(from 0deg, transparent 0deg 30deg, rgba(251, 191, 36, 0.05) 30deg 60deg)`
                                 }}
                             ></motion.div>
-                        )}
-                    </div>
+                        </div>
+                    </motion.div>
+                </div>
 
-                    {/* <motion.p
-            variants={itemVariants}
-            className="text-sm sm:text-base text-center max-w-3xl mt-8 text-stone-300 px-4"
-          >
-            Our architectural designs strictly adhere to ancient Vastu Shastra principles, creating spaces that
-            harmonize with natural energies to promote health, prosperity, and positive energy flow.
-          </motion.p> */}
-                </motion.div>
+                {/* Mobile Layout */}
+                <div className="lg:hidden">
+                    {/* Vastu Chakra Section */}
+                    <motion.div
+                        initial="hidden"
+                        animate={inView ? "visible" : "hidden"}
+                        variants={containerVariants}
+                        className="flex justify-center mb-12"
+                    >
+                        <div className="relative w-full max-w-xs">
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{
+                                    duration: 120,
+                                    repeat: Infinity,
+                                    ease: "linear",
+                                }}
+                                className="relative w-full aspect-square"
+                            >
+                                {/* Background Circle with subtle pattern */}
+                                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 shadow-lg"></div>
 
-                {/* Stats Highlights - Horizontal scroll on mobile */}
-                <motion.div
-                    initial="hidden"
-                    animate={inView ? "visible" : "hidden"}
-                    variants={containerVariants}
-                    className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
-                >
-                    {stats.map((stat, index) => (
-                        <motion.div
-                            key={index}
-                            variants={itemVariants}
-                            whileHover={{
-                                y: isMobile ? 0 : -5,
-                                boxShadow: "0 10px 25px -5px rgba(245, 158, 11, 0.2)",
-                                backdropFilter: "blur(8px)"
-                            }}
-                            className={`
-        bg-gradient-to-br from-gray-900/80 to-gray-800/90
-        p-4 sm:p-5 rounded-xl shadow-lg
-        border border-gray-700/50 group
-        backdrop-blur-sm
-        transition-all duration-300
-        hover:border-amber-400/30 hover:from-gray-900/70 hover:to-gray-800/80
-        ${isMobile ? 'h-full' : ''}
-      `}
-                        >
-                            {/* Glassy overlay effect */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-amber-400/5 to-amber-600/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                                {/* Inner decorative rings */}
+                                <div className="absolute inset-3 rounded-full border border-amber-300/30"></div>
+                                <div className="absolute inset-6 rounded-full border border-amber-400/20"></div>
 
-                            <div className="relative z-10">
-                                <div className="mb-2 sm:mb-3 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-400/10 group-hover:bg-amber-400/20 transition-colors duration-300">
+                                {/* Center Dot with pulsing animation */}
+                                <motion.div
+                                    className="absolute top-1/2 left-1/2 w-6 h-6 -mt-3 -ml-3 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 shadow-lg shadow-amber-500/30 z-20"
+                                    variants={pulseVariants}
+                                    animate="pulse"
+                                ></motion.div>
+
+                                {/* Directions */}
+                                {vastuDirections.map((direction) => (
+                                    <div key={direction.id}>
+                                        <motion.div
+                                            onTouchStart={() => setHoverDirection(direction.id)}
+                                            onTouchEnd={() => setHoverDirection(null)}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ delay: 0.5 }}
+                                            className="absolute top-1/2 left-1/2 w-1/2 h-1 origin-left"
+                                            style={{ transform: `rotate(${direction.angle}deg)` }}
+                                        >
+                                            <div
+                                                className="absolute right-0 w-1/2 h-1 transition-all duration-300"
+                                                style={{
+                                                    background: `linear-gradient(to right, transparent, ${direction.color})`,
+                                                    opacity: hoverDirection === direction.id ? 1 : 0.7,
+                                                    height: hoverDirection === direction.id ? '2px' : '1px'
+                                                }}
+                                            ></div>
+
+                                            <motion.div
+                                                className="absolute right-0 w-4 h-4 rounded-full -mt-2 flex items-center justify-center shadow-md"
+                                                style={{ backgroundColor: direction.color }}
+                                                variants={pulseVariants}
+                                                animate={hoverDirection === direction.id ? "pulse" : "pulse"}
+                                            >
+                                                {direction.icon}
+                                            </motion.div>
+
+                                            <div
+                                                className={`absolute right-0 -mt-10 text-xs font-medium text-center w-24 transition-all duration-300`}
+                                                style={{
+                                                    color: direction.color,
+                                                    transform: `rotate(-${direction.angle}deg)`,
+                                                    opacity: hoverDirection === direction.id ? 1 : 0.8,
+                                                    fontWeight: hoverDirection === direction.id ? 'bold' : 'normal'
+                                                }}
+                                            >
+                                                <div className="whitespace-nowrap">{direction.name}</div>
+                                                <div className="text-[0.65rem] opacity-80 mt-0.5">{direction.element} {direction.icon}</div>
+                                            </div>
+                                        </motion.div>
+                                    </div>
+                                ))}
+                            </motion.div>
+                        </div>
+                    </motion.div>
+
+                    {/* Stats Cards - Mobile */}
+                    <motion.div
+                        initial="hidden"
+                        animate={inView ? "visible" : "hidden"}
+                        variants={containerVariants}
+                        className="grid grid-cols-2 gap-4"
+                    >
+                        {stats.map((stat, index) => (
+                            <motion.div
+                                key={index}
+                                variants={itemVariants}
+                                className="bg-white p-4 rounded-lg shadow-sm border border-gray-200"
+                            >
+                                <div className="mb-3 flex items-center justify-center w-10 h-10 rounded-full bg-amber-100">
                                     {React.cloneElement(stat.icon, {
-                                        className: `${stat.icon.props.className} text-amber-400/90 group-hover:text-amber-300`
+                                        className: `${stat.icon.props.className} text-amber-600`
                                     })}
                                 </div>
 
-                                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1 group-hover:text-amber-100 transition-colors">
+                                <h3 className="text-2xl font-bold text-gray-900 mb-1">
                                     {stat.value}
                                 </h3>
-                                <p className="text-sm sm:text-base font-medium text-stone-100 mb-1 leading-tight">
+                                <p className="text-sm font-medium text-gray-800 mb-1 leading-tight">
                                     {stat.label}
                                 </p>
-                                <p className="text-xs sm:text-sm text-stone-400/90 leading-snug">
+                                <p className="text-xs text-gray-600 leading-snug">
                                     {stat.description}
                                 </p>
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
             </div>
         </div>
     );

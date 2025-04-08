@@ -146,7 +146,7 @@ const Services = () => {
   };
 
   return (
-    <section className="relative py-16 bg-black overflow-hidden" id='services'>
+    <section className="relative py-16 bg-white overflow-hidden" id='services'>
       {/* Subtle animated background gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div

@@ -413,8 +413,7 @@ const Home = () => {
         />
       </section>
 
-      <section className="py-12 sm:py-16 px-4 bg-gradient-to-br from-stone-900 to-black relative overflow-hidden">
-        {/* Background animated shapes */}
+      {/* <section className="py-12 sm:py-16 px-4 bg-gradient-to-br from-stone-900 to-black relative overflow-hidden">
         <motion.div
           className="absolute -right-24 -top-24 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"
           animate={{
@@ -432,7 +431,7 @@ const Home = () => {
           transition={{ duration: 8, repeat: Infinity, delay: 2 }}
         />
 
-        {/* <motion.div
+         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
@@ -460,10 +459,10 @@ const Home = () => {
               <span className="relative z-10 text-sm sm:text-base">Get a Free Consultation</span>
             </Link>
           </motion.div>
-        </motion.div> */}
+        </motion.div> 
 
 
-      </section>
+      </section> */}
       <Stats id="stats" />
       <Services id="services" />
       <Projects id="project" />
