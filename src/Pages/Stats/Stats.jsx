@@ -112,7 +112,7 @@ const Stats = () => {
               radial-gradient(circle at 70% 80%, rgba(255,165,0,0.5) 0%, transparent 25%),
               linear-gradient(135deg, #ffffff 0%, #fff0f5 50%, #ffebcd 100%)
             `
-          }}>
+        }}>
             {/* Background decorative elements */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute -left-20 -top-20 w-64 h-64 bg-gradient-to-r from-amber-100 to-amber-50 rounded-full opacity-20 blur-3xl"></div>
@@ -130,8 +130,11 @@ const Stats = () => {
                     className="text-center mb-12 lg:mb-16"
                 >
                     <motion.h2
-                        variants={itemVariants}
-                        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900"
+                        className="text-3xl md:text-4xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-stone-800 to-stone-600"
+                        initial={{ opacity: 0, y: 15 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.1 }}
+                        viewport={{ once: true }}
                     >
                         Vastu-Compliant Design & Construction
                     </motion.h2>

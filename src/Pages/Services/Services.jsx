@@ -180,7 +180,7 @@ const Services = () => {
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            Our Premium Services
+            Our Services
           </motion.h2>
           
           <motion.div 

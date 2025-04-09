@@ -260,9 +260,15 @@ const Projects = () => {
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="relative inline-block"
                     >
-                        <h2 className="text-4xl sm:text-5xl font-bold mb-2 sm:mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-stone-800 to-stone-600">
-                            Our Portfolio
-                        </h2>
+                        <motion.h2 
+                                    className="text-3xl md:text-4xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-stone-800 to-stone-600"
+                                    initial={{ opacity: 0, y: 15 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8, delay: 0.1 }}
+                                    viewport={{ once: true }}
+                                  >
+                                    Our Projects
+                                  </motion.h2>
                         <motion.div
                             initial={{ width: "0%" }}
                             animate={isInView ? { width: "100%" } : {}}

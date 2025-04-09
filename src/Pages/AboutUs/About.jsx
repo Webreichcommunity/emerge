@@ -1,156 +1,272 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 function About() {
+    const [showFullMission, setShowFullMission] = useState(false);
+    const [expandedCard, setExpandedCard] = useState(null);
+    
+    // Animation variants
+    const fadeIn = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { 
+            opacity: 1, 
+            y: 0,
+            transition: { duration: 0.6 }
+        }
+    };
+    
+    const staggerChildren = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2
+            }
+        }
+    };
+    
+    // Engineer data
+    const engineers = [
+        {
+            id: 1,
+            name: "Er. Purvesh R. Sakarkar",
+            title: "Civil Engineer",
+            image: "nande.JPG",
+            shortBio: "Structural design expert bringing innovative engineering solutions to complex projects.",
+            fullBio: "With expertise in structural design and analysis, Purvesh brings innovative engineering solutions to our most complex projects. His leadership ensures all structures exceed safety standards while maintaining architectural integrity.",
+            quote: "Engineering isn't just about calculations—it's about creating structures that elevate human experience.",
+            stats: [
+                { value: "5+", label: "Years Exp.", color: "orange" },
+                { value: "M.E", label: "Civil Eng.", color: "red" },
+                { value: "30+", label: "Projects", color: "pink" }
+            ]
+        },
+        {
+            id: 2,
+            name: "Er. Bhushan V. Kale",
+            title: "Civil Engineering",
+            image: "nande.JPG",
+            shortBio: "Sustainable construction specialist with focus on eco-friendly design practices.",
+            fullBio: "Bhushan specializes in sustainable construction practices and eco-friendly design. His innovative approach to civil engineering has earned our company multiple green building certifications and industry recognition.",
+            quote: "The best engineering solutions work with nature, not against it—balancing progress with preservation.",
+            stats: [
+                { value: "5+", label: "Years Exp.", color: "blue" },
+                { value: "B.E", label: "Civil", color: "indigo" },
+                { value: "5+", label: "Awards", color: "purple" }
+            ]
+        }
+    ];
+
     return (
-        <div className="min-h-screen bg-white">
-            {/* Hero Section with Black Background */}
-            <div className="relative py-16 md:py-24 bg-black">
-                <div className="container mx-auto px-4 md:px-6 text-center">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">Building Dreams, Crafting Reality</h1>
-                    <p className="text-lg md:text-xl text-white opacity-90 max-w-3xl mx-auto">
+        <div className="min-h-screen bg-gray-50" id='about'>
+            {/* Hero Section with Modern Design */}
+            <motion.div 
+                className="relative py-12 md:py-16 bg-black overflow-hidden"
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeIn}
+            >
+                <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
+                    <motion.h1 
+                        className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-4"
+                        variants={fadeIn}
+                    >
+                        Building Dreams, Crafting Reality
+                    </motion.h1>
+                    <motion.p 
+                        className="text-base md:text-lg text-white opacity-90 max-w-2xl mx-auto"
+                        variants={fadeIn}
+                    >
                         With over 20 years of excellence in construction, we transform visions into lasting structures.
-                    </p>
+                    </motion.p>
                 </div>
+                
+                {/* Abstract background elements */}
+                <motion.div 
+                    className="absolute top-0 right-0 w-64 h-64 rounded-full bg-stone-500 opacity-20 -mr-32 -mt-32"
+                    animate={{ 
+                        scale: [1, 1.2, 1],
+                        opacity: [0.2, 0.3, 0.2]
+                    }}
+                    transition={{ 
+                        duration: 8,
+                        repeat: Infinity,
+                        repeatType: "reverse"
+                    }}
+                />
+                
                 {/* Decorative element */}
-                <div className="absolute bottom-0 left-0 w-full h-8 md:h-16 bg-white" style={{
+                <div className="absolute bottom-0 left-0 w-full h-6 md:h-12 bg-gray-50" style={{
                     clipPath: "polygon(0 100%, 100% 100%, 100% 0)"
                 }}></div>
-            </div>
+            </motion.div>
 
-            {/* Content Section with Custom Background */}
-            <div className="relative py-12 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden text-gray-900" style={{
-                background: "radial-gradient(circle at 70% 80%, rgba(255,165,0,0.5) 0%, transparent 25%), linear-gradient(135deg, #ffffff 0%, #fff0f5 50%, #ffebcd 100%)"
-            }}>
-                <div className="container mx-auto">
-                    <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
-                        {/* Enhanced Image Section */}
-                        <div className="w-full md:w-1/2 relative mb-8 md:mb-0">
-                            <div className="absolute inset-0 bg-gradient-to-r from-stone-500 to-stone-800 rounded-xl md:rounded-2xl transform rotate-3 scale-105 shadow-xl"></div>
+            {/* Content Section with Clean Design */}
+            <div className="py-8 md:py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+                <div className="container mx-auto max-w-6xl">
+                    <motion.div 
+                        className="flex flex-col md:flex-row items-center gap-6 md:gap-12"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={staggerChildren}
+                    >
+                        {/* Image Section */}
+                        <motion.div 
+                            className="w-full md:w-5/12 relative mb-6 md:mb-0"
+                            variants={fadeIn}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-900 rounded-lg transform rotate-2 scale-105 shadow-lg"></div>
                             <img
                                 src="/nande.JPG"
                                 alt="Construction Professional"
-                                className="relative w-full rounded-lg md:rounded-xl shadow-xl border-4 md:border-8 border-white hover:scale-105 transition-transform duration-300 z-10"
+                                className="relative w-full h-full object-cover rounded-lg border-2 border-white shadow-lg z-10"
                             />
-                            <div className="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 bg-orange-500 text-white p-2 md:p-4 rounded-lg shadow-lg z-20 text-sm md:text-base">
+                            <motion.div 
+                                className="absolute -bottom-2 -right-2 bg-stone-500 text-white p-2 rounded-lg shadow-lg z-20 text-sm"
+                                whileHover={{ scale: 1.05 }}
+                            >
                                 <p className="font-bold">20+ Years Excellence</p>
-                            </div>
-                        </div>
+                            </motion.div>
+                        </motion.div>
 
                         {/* About Text */}
-                        <div className="w-full md:w-1/2 space-y-4 md:space-y-8">
-                            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800">
-                                <span className="text-orange-500">About</span> Our Company
+                        <motion.div 
+                            className="w-full md:w-7/12 space-y-4"
+                            variants={fadeIn}
+                        >
+                            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+                                <span className="text-stone-500">About</span> Our Company
                             </h2>
 
-                            <p className="text-lg md:text-xl text-gray-700">
-                                Founded in 2003, <span className="font-semibold text-red-500">Premier Construction</span> has been at the forefront of construction excellence, delivering high-quality residential and commercial projects across the region.
+                            <p className="text-base md:text-lg text-gray-700">
+                                Founded in 2003, <span className="font-semibold text-stone-400">Premier Construction</span> has been at the forefront of construction excellence, delivering high-quality residential and commercial projects across the region.
                             </p>
 
-                            <p className="text-lg md:text-xl text-gray-700">
-                                Our team of <span className="text-pink-500 font-medium">certified professionals</span> brings innovation, precision, and dedication to every project, ensuring structures that stand the test of time.
-                            </p>
-
-                            <div className="bg-white bg-opacity-80 p-4 md:p-8 rounded-xl md:rounded-2xl shadow-lg md:shadow-xl border-l-4 border-orange-500">
-                                <h3 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2 md:mb-3">Our Mission</h3>
-                                <p className="text-gray-700 text-base md:text-lg">
-                                    To build sustainable, safe, and aesthetically pleasing structures while maintaining the highest standards of quality and client satisfaction.
+                            {/* Mission & Vision with Read More */}
+                            <motion.div 
+                                className="bg-white backdrop-filter backdrop-blur-sm bg-opacity-70 p-4 rounded-lg shadow-md border-l-4 border-stone-500"
+                                whileHover={{ boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <h3 className="text-xl font-semibold text-gray-800 mb-2">Our Mission & Vision</h3>
+                                <p className="text-gray-700 text-sm md:text-base">
+                                    {showFullMission ? (
+                                        <>
+                                            To build sustainable, safe, and aesthetically pleasing structures while maintaining the highest standards of quality and client satisfaction. We aim to be the region's most trusted construction partner, known for integrity, innovation, and excellence in every project we undertake. Our vision encompasses creating spaces that positively impact communities while embracing cutting-edge construction technologies.
+                                        </>
+                                    ) : (
+                                        <>
+                                            To build sustainable, safe, and aesthetically pleasing structures while maintaining the highest standards of quality and client satisfaction...
+                                        </>
+                                    )}
                                 </p>
-                            </div>
+                                <motion.button
+                                    className="mt-2 text-stone-600 text-sm font-medium flex items-center hover:text-stone-700"
+                                    onClick={() => setShowFullMission(!showFullMission)}
+                                    whileHover={{ scale: 1.03 }}
+                                >
+                                    {showFullMission ? 'Show Less' : 'Read More'}
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        {showFullMission ? (
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                                        ) : (
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                        )}
+                                    </svg>
+                                </motion.button>
+                            </motion.div>
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Engineers Section - Modern Card Design */}
+                    <motion.div 
+                        className="mt-12 md:mt-16"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-100px" }}
+                        variants={staggerChildren}
+                    >
+                        <motion.h2 
+                            className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-6 md:mb-8"
+                            variants={fadeIn}
+                        >
+                            <span className="text-stone-500">Meet</span> Our Lead Engineers
+                        </motion.h2>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            {engineers.map((engineer) => (
+                                <motion.div 
+                                    key={engineer.id}
+                                    className="relative bg-white bg-opacity-50 backdrop-filter backdrop-blur-md rounded-xl shadow-lg overflow-hidden group"
+                                    variants={fadeIn}
+                                    whileHover={{ y: -5 }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <div className="relative h-52">
+                                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-60"></div>
+                                        <img
+                                            src={engineer.image}
+                                            alt={engineer.name}
+                                            className="w-full h-full object-cover object-center"
+                                        />
+                                        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                                            <h3 className="text-xl font-bold mb-1 drop-shadow-md">{engineer.name}</h3>
+                                            <p className="text-sm font-medium bg-black bg-opacity-40 inline-block px-2 py-1 rounded-full">
+                                                {engineer.title}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="p-4">
+                                        <div className="flex flex-wrap gap-2 mb-3">
+                                            {engineer.stats.map((stat, index) => (
+                                                <div 
+                                                    key={index} 
+                                                    className={`bg-${stat.color}-100 p-1.5 rounded-md text-center w-22`}
+                                                >
+                                                    <span className={`font-bold text-${stat.color}-600 text-xs`}> {stat.value}  <p className={`text-${stat.color}-800 text-xs`}>  {stat.label}</p></span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        
+                                        <p className="text-gray-700 text-sm">
+                                            {expandedCard === engineer.id ? engineer.fullBio : engineer.shortBio}
+                                        </p>
+                                        
+                                        {expandedCard === engineer.id && (
+                                            <motion.div 
+                                                className="mt-3 pt-3 border-t border-gray-200"
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ duration: 0.3 }}
+                                            >
+                                                <p className="italic text-gray-600 text-xs">
+                                                    "{engineer.quote}"
+                                                </p>
+                                            </motion.div>
+                                        )}
+                                        
+                                        <motion.button
+                                            className="mt-3 text-orange-600 text-xs font-medium flex items-center hover:text-orange-700"
+                                            onClick={() => setExpandedCard(expandedCard === engineer.id ? null : engineer.id)}
+                                            whileHover={{ scale: 1.03 }}
+                                        >
+                                            {expandedCard === engineer.id ? 'Show Less' : 'Read More'}
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                {expandedCard === engineer.id ? (
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                                                ) : (
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                                )}
+                                            </svg>
+                                        </motion.button>
+                                    </div>
+                                </motion.div>
+                            ))}
                         </div>
-                    </div>
-
-                    {/* Engineers Section - Improved for mobile */}
-                    <div className="mt-16 md:mt-24">
-                        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12">
-                            <span className="text-orange-500">Meet</span> Our Lead Engineers
-                        </h2>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-12">
-                            {/* Engineer Card 1 */}
-                            <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl overflow-hidden group">
-                                <div className="relative h-64 md:h-80">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-white-500 to-stone-300 opacity-90"></div>
-                                    <img
-                                        src="nande.JPG"
-                                        alt="Chief Engineer"
-                                        className="w-full h-full object-cover object-center opacity-75 group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                    <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
-                                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 md:mb-2">Er. Purvesh R. Sakarkar</h3>
-                                        <p className="text-base md:text-xl font-semibold bg-black bg-opacity-40 inline-block px-2 md:px-3 py-1 rounded-full">
-                                            Civil Engineer
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="p-4 md:p-8">
-                                    <div className="flex flex-wrap gap-2 md:gap-4 mb-4 md:mb-6">
-                                        <div className="bg-orange-100 p-2 md:p-3 rounded-full text-center">
-                                            <span className="font-bold text-orange-600 text-sm md:text-base">5+</span>
-                                            <p className="text-orange-800 text-xs md:text-sm">Years Exp.</p>
-                                        </div>
-                                        <div className="bg-red-100 p-2 md:p-3 rounded-full text-center">
-                                            <span className="font-bold text-red-600 text-sm md:text-base">M.E</span>
-                                            <p className="text-red-800 text-xs md:text-sm">Civil Eng.</p>
-                                        </div>
-                                        <div className="bg-pink-100 p-2 md:p-3 rounded-full text-center">
-                                            <span className="font-bold text-pink-600 text-sm md:text-base">30+</span>
-                                            <p className="text-pink-800 text-xs md:text-sm">Projects</p>
-                                        </div>
-                                    </div>
-                                    <p className="text-gray-700 text-base md:text-lg">
-                                        With expertise in structural design and analysis, Purvesh brings innovative engineering solutions to our most complex projects. His leadership ensures all structures exceed safety standards while maintaining architectural integrity.
-                                    </p>
-                                    <div className="mt-4 md:mt-6 pt-4 md:pt-6 border-t border-gray-200">
-                                        <p className="italic text-gray-600 text-sm md:text-base">
-                                            "Engineering isn't just about calculations—it's about creating structures that elevate human experience."
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Engineer Card 2 */}
-                            <div className="bg-white rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl overflow-hidden group">
-                                <div className="relative h-64 md:h-80">
-                                    <div className="absolute inset-0 bg-gradient-to-r from-stone-300 to-white-400 opacity-90"></div>
-                                    <img
-                                        src="/about.JPG"
-                                        alt="Civil Engineer"
-                                        className="w-full h-full object-cover object-center opacity-75 group-hover:scale-110 transition-transform duration-500"
-                                    />
-                                    <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 text-white">
-                                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 md:mb-2">Er. Bhushan V. Kale</h3>
-                                        <p className="text-base md:text-xl font-semibold bg-black bg-opacity-40 inline-block px-2 md:px-3 py-1 rounded-full">
-                                            Civil Engineering
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="p-4 md:p-8">
-                                    <div className="flex flex-wrap gap-2 md:gap-4 mb-4 md:mb-6">
-                                        <div className="bg-blue-100 p-2 md:p-3 rounded-full text-center">
-                                            <span className="font-bold text-blue-600 text-sm md:text-base">5+</span>
-                                            <p className="text-blue-800 text-xs md:text-sm">Years Exp.</p>
-                                        </div>
-                                        <div className="bg-indigo-100 p-2 md:p-3 rounded-full text-center">
-                                            <span className="font-bold text-indigo-600 text-sm md:text-base">B.E</span>
-                                            <p className="text-indigo-800 text-xs md:text-sm">Civil</p>
-                                        </div>
-                                        <div className="bg-purple-100 p-2 md:p-3 rounded-full text-center">
-                                            <span className="font-bold text-purple-600 text-sm md:text-base">5+</span>
-                                            <p className="text-purple-800 text-xs md:text-sm">Awards</p>
-                                        </div>
-                                    </div>
-                                    <p className="text-gray-700 text-base md:text-lg">
-                                        Bhushan specializes in sustainable construction practices and eco-friendly design. His innovative approach to civil engineering has earned our company multiple green building certifications and industry recognition.
-                                    </p>
-                                    <div className="mt-4 md:mt-6 pt-4 md:pt-6 border-t border-gray-200">
-                                        <p className="italic text-gray-600 text-sm md:text-base">
-                                            "The best engineering solutions work with nature, not against it—balancing progress with preservation."
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </div>
