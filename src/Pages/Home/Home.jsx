@@ -6,54 +6,54 @@ import Services from '../Services/Services';
 import Stats from '../Stats/Stats';
 import Projects from '../Projects/Projects';
 import Contactform from '../ContactUs/ContactUs';
-
+import About from '../AboutUs/About';
 const services = [
   {
     name: "Planning",
     href: "/services/planning",
-    image: "/planning.PNG",
+    image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     description: "Strategic planning to bring your vision to life with precision and efficiency."
   },
   {
     name: "Sanctioning",
     href: "/services/sanctioning",
-    image: "/image2.PNG",
+    image: "https://www.freshbooks.com/wp-content/uploads/2022/03/approve-an-invoice-payment.jpg",
     description: "Ensuring legal approvals and compliance for a seamless construction process."
   },
   {
     name: "Building Construction",
     href: "/services/buildingconstruction",
-    image: "/image3.PNG",
+    image: "https://images.pexels.com/photos/31539308/pexels-photo-31539308/free-photo-of-modern-architectural-building-in-ankara-skyline.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     description: "High-quality construction services for residential and commercial spaces."
   },
   {
     name: "3D Modeling",
     href: "/services/3dmodeling",
-    image: "/image4.PNG",
+    image: "https://images.pexels.com/photos/19124461/pexels-photo-19124461/free-photo-of-laptop-on-desk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     description: "Realistic 3D visualizations to preview your dream project before construction."
   },
   {
     name: "Interior Designing",
     href: "/services/interiordesigning",
-    image: "/image5.PNG",
+    image: "https://images.pexels.com/photos/31491025/pexels-photo-31491025/free-photo-of-elegant-rooftop-restaurant-interior-with-city-view.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     description: "Creative interior solutions that enhance aesthetics and functionality."
   },
   {
     name: "Renovation",
     href: "/services/renovation",
-    image: "/image6.PNG",
+    image: "https://images.pexels.com/photos/3562689/pexels-photo-3562689.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     description: "Transforming spaces with modern upgrades and high-quality renovations."
   },
   {
     name: "Estimation",
     href: "/services/estimation",
-    image: "/image7.PNG",
+    image: "https://images.pexels.com/photos/5466809/pexels-photo-5466809.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     description: "Accurate cost estimation to keep your project within budget."
   },
   {
     name: "Land Sub-division",
     href: "/services/landsubdivision",
-    image: "/image8.PNG",
+    image: "https://images.pexels.com/photos/19679304/pexels-photo-19679304/free-photo-of-measure-on-white-background.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     description: "Expert solutions for dividing land into plots with legal approvals."
   }
 ];
@@ -466,6 +466,7 @@ const Home = () => {
       <Stats id="stats" />
       <Services id="services" />
       <Projects id="project" />
+      <About />
       <Contactform />
     </div>
   );

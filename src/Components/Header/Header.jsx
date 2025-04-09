@@ -10,24 +10,24 @@ const menuItems = [
     {
         name: "Services",
         href: "#services",  // Added hash
-        submenu: [
-            { name: "Planning", href: "/services#planning" },
-            { name: "Sanctioning", href: "/services#sanctioning" },
-            { name: "Building Construction", href: "/services#buildingconstruction" },
-            { name: "3D Modeling", href: "/services#3dmodeling" },
-            { name: "Interior Designing", href: "/services#interiordesigning" },
-            { name: "Renovation", href: "/services#renovation" },
-            { name: "Estimation", href: "/services#estimation" },
-            { name: "Land Sub-division", href: "/services#landsubdivision" }
-        ]
+        // submenu: [
+        //     { name: "Planning", href: "/services#planning" },
+        //     { name: "Sanctioning", href: "/services#sanctioning" },
+        //     { name: "Building Construction", href: "/services#buildingconstruction" },
+        //     { name: "3D Modeling", href: "/services#3dmodeling" },
+        //     { name: "Interior Designing", href: "/services#interiordesigning" },
+        //     { name: "Renovation", href: "/services#renovation" },
+        //     { name: "Estimation", href: "/services#estimation" },
+        //     { name: "Land Sub-division", href: "/services#landsubdivision" }
+        // ]
     },
     {
         name: "Our Work",
         href: "#projects",
         submenu: [
-            { name: "Skyline Towers", href: "/ourwork#skylinetowers" },
-            { name: "Greenfield Residences", href: "/ourwork#greenfieldresidences" },
-            { name: "Metro Bridge Project", href: "/ourwork#metrobridgeproject" },
+            { name: "TechHub Innovation Center", href: "/ourwork/techhub-innovation-center" },
+            { name: "Oceanview Luxury Residences", href: "/ourwork/oceanview-luxury-residences" },
+            { name: "Greenfield Corporate Campus", href: "/ourwork/greenfield-corporate-campus" },
             { name: "Sunrise Commercial Complex", href: "/ourwork#sunrisecommercial" },
             { name: "Elite Villas", href: "/ourwork#elitevillas" },
             { name: "Urban Road Development", href: "/ourwork#urbanroaddevelopment" },
@@ -113,7 +113,7 @@ export default function Header() {
                                                 to={subitem.href}
                                                 onClick={(e) => handleHashClick(e, subitem.href)}
                                                 className={({ isActive }) =>
-                                                    `block px-4 py-2 text-sm text-stone-800 hover:bg-stone-800 hover:text-gray-300
+                                                    `block px-4 py-2 text-sm text-stone-200 hover:bg-stone-800 hover:text-gray-300
                                                 ${isActive ? "text-gray-800 bg-stone-800" : ""}`
                                                 }
                                             >

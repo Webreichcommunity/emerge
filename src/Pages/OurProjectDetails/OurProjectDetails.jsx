@@ -60,7 +60,10 @@ const ProjectDetail = () => {
 
     if (loading) {
         return (
-            <div className="flex flex-col items-center justify-center bg-black text-white">
+            <div className="flex flex-col items-center justify-center min-h-screen" style={{
+                background: `radial-gradient(circle at 70% 80%, rgba(255,165,0,0.5) 0%, transparent 25%),
+                linear-gradient(135deg, #ffffff 0%, #fff0f5 50%, #ffebcd 100%)`
+            }}>
                 <motion.div
                     animate={{ 
                         rotate: 360,
@@ -74,13 +77,13 @@ const ProjectDetail = () => {
                     className="w-16 h-16 mb-4 relative"
                 >
                     <div className="absolute inset-0 rounded-full border-4 border-stone-500 opacity-30"></div>
-                    <div className="absolute inset-0 rounded-full border-4 border-t-blue-500 border-r-transparent border-b-transparent border-l-transparent"></div>
+                    <div className="absolute inset-0 rounded-full border-4 border-t-orange-500 border-r-transparent border-b-transparent border-l-transparent"></div>
                 </motion.div>
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
-                    className="text-stone-400 font-medium"
+                    className="text-stone-700 font-medium"
                 >
                     Loading project...
                 </motion.p>
@@ -90,12 +93,15 @@ const ProjectDetail = () => {
 
     if (!project) {
         return (
-            <div className=" bg-black text-white flex flex-col items-center justify-center p-6">
+            <div className="min-h-screen flex flex-col items-center justify-center p-6" style={{
+                background: `radial-gradient(circle at 70% 80%, rgba(255,165,0,0.5) 0%, transparent 25%),
+                linear-gradient(135deg, #ffffff 0%, #fff0f5 50%, #ffebcd 100%)`
+            }}>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="text-center max-w-md w-full bg-stone-900/50 backdrop-blur-sm p-8 rounded-2xl shadow-lg"
+                    className="text-center max-w-md w-full bg-white/50 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-white/40"
                 >
                     <motion.div
                         animate={{ 
@@ -107,13 +113,13 @@ const ProjectDetail = () => {
                     >
                         😕
                     </motion.div>
-                    <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-stone-300 to-white bg-clip-text text-transparent">Project Not Found</h2>
-                    <p className="mb-8 text-stone-400">We couldn't find the project you're looking for.</p>
+                    <h2 className="text-3xl font-bold mb-4 text-gray-900">Project Not Found</h2>
+                    <p className="mb-8 text-stone-500">We couldn't find the project you're looking for.</p>
                     <Link to="/ourwork">
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white rounded-lg font-medium shadow-lg shadow-blue-700/20 w-full"
+                            className="px-6 py-3 bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white rounded-lg font-medium shadow-lg shadow-orange-500/20 w-full"
                         >
                             Back to Projects
                         </motion.button>
@@ -143,7 +149,11 @@ const ProjectDetail = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="min-h-screen bg-black text-white"
+            className="relative min-h-screen overflow-hidden text-gray-900"
+            style={{
+                background: `radial-gradient(circle at 70% 80%, rgba(255,165,0,0.5) 0%, transparent 25%),
+                linear-gradient(135deg, #ffffff 0%, #fff0f5 50%, #ffebcd 100%)`
+            }}
         >
             {/* Hero Header with Parallax */}
             <motion.div 
@@ -155,7 +165,7 @@ const ProjectDetail = () => {
                 <motion.div 
                     className="absolute inset-0 z-0"
                     style={{ 
-                        backgroundImage: `url(${gallery[0]})`,
+                        backgroundImage: `url(${project.mainImage})`,
                         backgroundPosition: 'center',
                         backgroundSize: 'cover',
                     }}
@@ -163,7 +173,7 @@ const ProjectDetail = () => {
                     animate={{ scale: 1, y: 0 }}
                     transition={{ duration: 1.5 }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black z-10" />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent z-10" />
                 
                 {/* Back Button - Floating Style */}
                 <div className="absolute top-4 left-4 z-20">
@@ -171,7 +181,7 @@ const ProjectDetail = () => {
                         <motion.button
                             whileHover={{ x: -5 }}
                             whileTap={{ scale: 0.95 }}
-                            className="flex items-center bg-black/60 backdrop-blur-sm text-white px-3 py-2 rounded-full shadow-lg"
+                            className="flex items-center bg-white/80 backdrop-blur-sm text-gray-900 px-4 py-2 rounded-full shadow-lg border border-white/40"
                         >
                             <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -183,17 +193,17 @@ const ProjectDetail = () => {
                 
                 {/* Title Overlay */}
                 <motion.div 
-                    className="absolute inset-x-0 bottom-0 px-6 py-6 sm:py-8 z-20"
+                    className="absolute inset-x-0 bottom-0 px-6 py-4 sm:py-6 z-20" // Reduced padding for better alignment
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.8 }}
                 >
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-white to-stone-300 drop-shadow-lg">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white drop-shadow-lg">
                         {project.title}
                     </h1>
-                    <div className="flex flex-wrap gap-2 mb-1">
+                    <div className="flex flex-wrap gap-2 mt-2"> {/* Added margin-top for spacing */}
                         {project.category && (
-                            <span className="bg-blue-600 px-3 py-1 rounded-full text-xs font-medium shadow-md">
+                            <span className="bg-orange-500 px-3 py-1 rounded-full text-xs text-white font-medium shadow-md">
                                 {project.category}
                             </span>
                         )}
@@ -212,7 +222,7 @@ const ProjectDetail = () => {
                     {project.tags && project.tags.map((tag, index) => (
                         <span 
                             key={index} 
-                            className="bg-stone-800 bg-opacity-50 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-stone-300"
+                            className="bg-white/50 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-stone-700 border border-white/40"
                         >
                             {tag}
                         </span>
@@ -221,7 +231,7 @@ const ProjectDetail = () => {
 
                 {/* Short Description */}
                 <motion.p 
-                    className="text-lg text-stone-300 mb-8 max-w-3xl border-l-2 border-stone-500 pl-4"
+                    className="text-lg text-stone-700 mb-8 max-w-3xl border-l-2 border-orange-400 pl-4"
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.5, duration: 0.6 }}
@@ -229,15 +239,15 @@ const ProjectDetail = () => {
                     {project.shortDescription}
                 </motion.p>
 
-                {/* Image Gallery - Full Width for Mobile */}
+                {/* Image Gallery - Full Width for Mobile with improved glass styling */}
                 <motion.div 
                     ref={galleryRef}
-                    className="mb-12 relative overflow-hidden rounded-lg shadow-2xl"
+                    className="mb-12 relative overflow-hidden rounded-2xl shadow-2xl"
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.6, duration: 0.6 }}
                 >
-                    <div className="relative w-full h-64 sm:h-80 md:h-[500px] bg-stone-900">
+                    <div className="relative w-full h-64 sm:h-80 md:h-96 bg-stone-100 overflow-hidden">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={currentImageIndex}
@@ -252,39 +262,38 @@ const ProjectDetail = () => {
                                     alt={`${project.title} - Image ${currentImageIndex + 1}`} 
                                     className="w-full h-full object-cover"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                             </motion.div>
                         </AnimatePresence>
                         
-                        {/* Navigation Controls */}
+                        {/* Navigation Controls - Improved */}
                         {gallery.length > 1 && (
                             <>
                                 <button 
                                     onClick={prevImage}
-                                    className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-black/40 backdrop-blur-sm hover:bg-black/60 p-2 rounded-full z-10 shadow-lg"
+                                    className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/60 hover:bg-white/80 backdrop-blur-sm p-3 rounded-full z-10 shadow-lg border border-white/40"
                                     aria-label="Previous image"
                                 >
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg className="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                     </svg>
                                 </button>
                                 <button 
                                     onClick={nextImage}
-                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-black/40 backdrop-blur-sm hover:bg-black/60 p-2 rounded-full z-10 shadow-lg"
+                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/60 hover:bg-white/80 backdrop-blur-sm p-3 rounded-full z-10 shadow-lg border border-white/40"
                                     aria-label="Next image"
                                 >
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg className="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                     </svg>
                                 </button>
                             </>
                         )}
                         
-                        {/* Image Counter with Progress Bar */}
+                        {/* Image Counter with Progress Bar - Enhanced */}
                         {gallery.length > 1 && (
                             <div className="absolute bottom-4 w-full flex justify-center z-10">
-                                <div className="flex items-center space-x-2 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full">
-                                    <span className="text-xs font-medium">
+                                <div className="flex items-center space-x-2 bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full border border-white/40">
+                                    <span className="text-xs font-medium text-gray-900">
                                         {currentImageIndex + 1}/{gallery.length}
                                     </span>
                                     <div className="flex space-x-1">
@@ -294,7 +303,7 @@ const ProjectDetail = () => {
                                                 onClick={() => setCurrentImageIndex(idx)}
                                                 className={`w-2 h-2 rounded-full transition-all ${
                                                     idx === currentImageIndex 
-                                                    ? 'bg-blue-500 w-4' 
+                                                    ? 'bg-orange-500 w-6' 
                                                     : 'bg-stone-400'
                                                 }`}
                                                 aria-label={`Go to image ${idx + 1}`}
@@ -307,63 +316,63 @@ const ProjectDetail = () => {
                     </div>
                 </motion.div>
 
-                {/* Mobile-optimized grid layout */}
+                {/* Mobile-optimized compact grid layout */}
                 <AnimatePresence>
                     {showDetails && (
                         <motion.div 
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="mb-12"
+                            className="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6"
                         >
-                            {/* Project Metadata Card - Mobile First */}
+                            {/* Project Metadata Card - Glass effect */}
                             <motion.div 
-                                className="bg-stone-900/70 backdrop-blur-sm p-6 rounded-2xl mb-8 shadow-lg border border-stone-800"
+                                className="bg-white/50 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/40 md:col-span-1 h-fit"
                                 whileHover={{ y: -5 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
-                                <h2 className="text-xl font-bold mb-6 border-b border-stone-700 pb-2 text-stone-200">
+                                <h2 className="text-xl font-bold mb-6 border-b border-stone-200 pb-2 text-gray-900">
                                     Project Details
                                 </h2>
                                 
-                                <div className="grid grid-cols-2 gap-y-4">
+                                <div className="space-y-5">
                                     <div>
                                         <h3 className="text-xs uppercase tracking-wider text-stone-500 mb-1">Client</h3>
-                                        <p className="font-medium text-white">{project.client}</p>
+                                        <p className="font-medium text-gray-900">{project.client}</p>
                                     </div>
                                     
                                     <div>
-                                        <h3 className="text-xs uppercase tracking-wider text-stone-500 mb-1">Year</h3>
-                                        <p className="font-medium text-white">{project.date}</p>
+                                        <h3 className="text-xs uppercase tracking-wider text-stone-500 mb-1">Timeline</h3>
+                                        <p className="font-medium text-gray-900">{project.date}</p>
                                     </div>
                                     
                                     <div>
                                         <h3 className="text-xs uppercase tracking-wider text-stone-500 mb-1">Category</h3>
-                                        <p className="font-medium text-white">{project.category}</p>
+                                        <p className="font-medium text-gray-900">{project.category}</p>
                                     </div>
                                     
-                                    {project.location && (
+                                    {project.totalSqFt && (
                                         <div>
-                                            <h3 className="text-xs uppercase tracking-wider text-stone-500 mb-1">Location</h3>
-                                            <p className="font-medium text-white">{project.location}</p>
+                                            <h3 className="text-xs uppercase tracking-wider text-stone-500 mb-1">Total Area</h3>
+                                            <p className="font-medium text-gray-900">{project.totalSqFt}</p>
                                         </div>
                                     )}
                                     
-                                    {project.squareFootage && (
-                                        <div className="col-span-2">
-                                            <h3 className="text-xs uppercase tracking-wider text-stone-500 mb-1">Size</h3>
-                                            <p className="font-medium text-white">{project.squareFootage}</p>
+                                    {project.totalCost && (
+                                        <div>
+                                            <h3 className="text-xs uppercase tracking-wider text-stone-500 mb-1">Budget</h3>
+                                            <p className="font-medium text-gray-900">{project.totalCost}</p>
                                         </div>
                                     )}
                                     
                                     {project.website && (
-                                        <div className="col-span-2 mt-2">
+                                        <div className="pt-2">
                                             <h3 className="text-xs uppercase tracking-wider text-stone-500 mb-1">Website</h3>
                                             <a 
                                                 href={project.website} 
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
-                                                className="inline-flex items-center text-blue-400 hover:text-blue-300 font-medium"
+                                                className="inline-flex items-center text-orange-600 hover:text-orange-700 font-medium"
                                             >
                                                 Visit Site
                                                 <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -375,89 +384,97 @@ const ProjectDetail = () => {
                                 </div>
                             </motion.div>
 
-                            {/* Project Description */}
-                            <div className="mb-12">
-                                <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-white to-stone-300 bg-clip-text text-transparent">
-                                    Project Overview
-                                </h2>
-                                <div className="prose prose-invert prose-stone max-w-none">
-                                    {project.description.split('\n\n').map((paragraph, idx) => (
-                                        <motion.p 
-                                            key={idx} 
-                                            className="mb-4 text-stone-300 leading-relaxed"
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: 0.1 * idx, duration: 0.5 }}
-                                        >
-                                            {paragraph}
-                                        </motion.p>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Testimonial Section - Enhanced */}
-                            {project.testimonial && (
+                            {/* Project Description and Testimonial - Combined for better layout */}
+                            <div className="md:col-span-2 space-y-6">
+                                {/* Project Description - Enhanced with glass effect */}
                                 <motion.div 
-                                    className="mb-12 overflow-hidden"
-                                    whileInView={{ scale: [0.98, 1] }}
+                                    className="bg-white/50 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/40"
+                                    whileHover={{ y: -3 }}
                                     transition={{ type: "spring", stiffness: 300 }}
                                 >
-                                    <div className="bg-gradient-to-r from-blue-900/70 to-indigo-900/70 backdrop-blur-sm p-6 sm:p-8 rounded-2xl relative overflow-hidden shadow-lg border border-blue-800/30">
-                                        <div className="absolute -right-10 -top-10 text-8xl opacity-10">
-                                            <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M10 11H6C3.79086 11 2 9.20914 2 7V6C2 3.79086 3.79086 2 6 2H7C9.20914 2 11 3.79086 11 6V10C11 16.0751 6.07513 21 0 21V20C5.52285 20 10 15.5228 10 10V11ZM23 11H19C16.7909 11 15 9.20914 15 7V6C15 3.79086 16.7909 2 19 2H20C22.2091 2 24 3.79086 24 6V10C24 16.0751 19.0751 21 13 21V20C18.5228 20 23 15.5228 23 10V11Z"/>
-                                            </svg>
-                                        </div>
-                                        
-                                        <blockquote className="text-lg sm:text-xl z-10 relative">
+                                    <h2 className="text-2xl font-bold mb-6 text-gray-900 border-b border-stone-200 pb-2">
+                                        Project Overview
+                                    </h2>
+                                    <div className="prose max-w-none">
+                                        {project.description.split('\n\n').map((paragraph, idx) => (
                                             <motion.p 
-                                                className="mb-4 text-white"
-                                                initial={{ opacity: 0 }}
-                                                whileInView={{ opacity: 1 }}
-                                                transition={{ duration: 1 }}
+                                                key={idx} 
+                                                className="mb-4 text-stone-700 leading-relaxed"
+                                                initial={{ opacity: 0, y: 10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                transition={{ delay: 0.1 * idx, duration: 0.5 }}
                                             >
-                                                "{project.testimonial.quote}"
+                                                {paragraph}
                                             </motion.p>
-                                            <footer className="font-medium flex items-center mt-4">
-                                                <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-3 text-lg font-bold">
-                                                    {project.testimonial.author.charAt(0)}
-                                                </div>
-                                                <div>
-                                                    <span className="block text-white">— {project.testimonial.author}</span>
-                                                    {project.testimonial.position && (
-                                                        <span className="block text-sm text-stone-300">{project.testimonial.position}</span>
-                                                    )}
-                                                </div>
-                                            </footer>
-                                        </blockquote>
+                                        ))}
                                     </div>
                                 </motion.div>
-                            )}
 
-                            {/* Call to Action - Enhanced for Mobile */}
+                                {/* Testimonial Section - Elegant glass effect */}
+                                {project.testimonial && (
+                                    <motion.div 
+                                        className="overflow-hidden"
+                                        whileInView={{ scale: [0.98, 1] }}
+                                        transition={{ type: "spring", stiffness: 300 }}
+                                    >
+                                        <div className="bg-gradient-to-r from-orange-100 to-amber-100 backdrop-blur-md p-6 rounded-2xl relative overflow-hidden shadow-lg border border-orange-200">
+                                            <div className="absolute -right-10 -top-10 text-8xl opacity-10 text-orange-500">
+                                                <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M10 11H6C3.79086 11 2 9.20914 2 7V6C2 3.79086 3.79086 2 6 2H7C9.20914 2 11 3.79086 11 6V10C11 16.0751 6.07513 21 0 21V20C5.52285 20 10 15.5228 10 10V11ZM23 11H19C16.7909 11 15 9.20914 15 7V6C15 3.79086 16.7909 2 19 2H20C22.2091 2 24 3.79086 24 6V10C24 16.0751 19.0751 21 13 21V20C18.5228 20 23 15.5228 23 10V11Z"/>
+                                                </svg>
+                                            </div>
+                                            
+                                            <blockquote className="text-lg z-10 relative">
+                                                <motion.p 
+                                                    className="mb-4 text-gray-900 italic"
+                                                    initial={{ opacity: 0 }}
+                                                    whileInView={{ opacity: 1 }}
+                                                    transition={{ duration: 1 }}
+                                                >
+                                                    "{project.testimonial.quote}"
+                                                </motion.p>
+                                                <footer className="font-medium flex items-center mt-4">
+                                                    <div className="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center mr-3 text-lg font-bold">
+                                                        {project.testimonial.author.charAt(0)}
+                                                    </div>
+                                                    <div>
+                                                        <span className="block text-gray-900 font-semibold">— {project.testimonial.author}</span>
+                                                        {project.testimonial.position && (
+                                                            <span className="block text-sm text-stone-500">{project.testimonial.position}</span>
+                                                        )}
+                                                    </div>
+                                                </footer>
+                                            </blockquote>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </div>
+
+                            {/* Call to Action - Full width with elegant gradient */}
                             <motion.div 
-                                className="text-center bg-gradient-to-b from-black to-stone-900 p-6 rounded-2xl border border-stone-800"
+                                className="text-center bg-gradient-to-r from-orange-50 to-amber-50 p-6 rounded-2xl shadow-lg border border-orange-100 md:col-span-3 mt-2"
                                 whileInView={{ y: [10, 0], opacity: [0, 1] }}
                                 transition={{ duration: 0.6 }}
                             >
                                 <motion.div
-                                    whileHover={{ scale: 1.03 }}
+                                    whileHover={{ scale: 1.01 }}
                                     transition={{ type: "spring", stiffness: 400 }}
+                                    className="max-w-2xl mx-auto"
                                 >
-                                    <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-white to-stone-300 bg-clip-text text-transparent">
+                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">
                                         Ready to start your project?
                                     </h2>
-                                    <p className="text-stone-400 mb-6">
+                                    <p className="text-stone-500 mb-6">
                                         Let's bring your vision to life. Reach out to discuss your ideas.
                                     </p>
                                     <Link to="/contact">
                                         <motion.button
                                             whileHover={{ 
                                                 scale: 1.05, 
-                                                boxShadow: "0 0 15px rgba(59, 130, 246, 0.5)" 
+                                                boxShadow: "0 0 15px rgba(245, 158, 11, 0.5)" 
                                             }}
                                             whileTap={{ scale: 0.95 }}
-                                            className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-lg font-medium shadow-lg shadow-blue-700/20"
+                                            className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white rounded-lg font-medium shadow-lg shadow-orange-500/20"
                                         >
                                             <span className="flex items-center justify-center">
                                                 Contact Us Today
