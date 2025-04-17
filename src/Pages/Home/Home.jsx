@@ -24,13 +24,13 @@ const services = [
   {
     name: "Building Construction",
     href: "/services/buildingconstruction",
-    image: "https://images.pexels.com/photos/31539308/pexels-photo-31539308/free-photo-of-modern-architectural-building-in-ankara-skyline.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    image: "https://images.pexels.com/photos/18162495/pexels-photo-18162495/free-photo-of-crane-near-concrete-buidling-under-construction.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     description: "High-quality construction services for residential and commercial spaces."
   },
   {
     name: "3D Modeling",
     href: "/services/3dmodeling",
-    image: "https://images.pexels.com/photos/19124461/pexels-photo-19124461/free-photo-of-laptop-on-desk.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    image: "https://img.freepik.com/free-photo/view-3d-house-model_23-2150761166.jpg?t=st=1744894707~exp=1744898307~hmac=cd83b8e9c868b1338cebb026bc3b93d8d6bf463d0b8698c111ffe3087258368d&w=826",
     description: "Realistic 3D visualizations to preview your dream project before construction."
   },
   {
@@ -54,7 +54,7 @@ const services = [
   {
     name: "Land Sub-division",
     href: "/services/landsubdivision",
-    image: "https://images.pexels.com/photos/19679304/pexels-photo-19679304/free-photo-of-measure-on-white-background.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    image: "https://images.pexels.com/photos/7937301/pexels-photo-7937301.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     description: "Expert solutions for dividing land into plots with legal approvals."
   }
 ];

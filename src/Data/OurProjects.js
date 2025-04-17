@@ -11,7 +11,7 @@ export const ourProjects = [
         "totalCost": "$10M",
         "category": "Technology",
         "tags": ["Commercial", "Innovation", "Tech"],
-        "mainImage": "https://images.pexels.com/photos/5506051/pexels-photo-5506051.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+        "mainImage": "/nande.JPG",
         "website": "#",
         "gallery": [
             "https://images.pexels.com/photos/1624990/pexels-photo-1624990.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
