@@ -107,17 +107,12 @@ const Stats = () => {
     ];
 
     return (
-        <div className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden text-gray-900" style={{
-            background: `
-              radial-gradient(circle at 70% 80%, rgba(255,165,0,0.5) 0%, transparent 25%),
-              linear-gradient(135deg, #ffffff 0%, #fff0f5 50%, #ffebcd 100%)
-            `
-        }}>
+        <div className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden text-gray-900 bg-white" >
             {/* Background decorative elements */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -left-20 -top-20 w-64 h-64 bg-gradient-to-r from-amber-100 to-amber-50 rounded-full opacity-20 blur-3xl"></div>
+                <div className="absolute -left-20 -top-20 w-64 h-64 bg-gradient-to-r from-stone-100 to-stone-50 rounded-full opacity-20 blur-3xl"></div>
                 <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-gradient-to-r from-blue-100 to-blue-50 rounded-full opacity-20 blur-3xl"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-64 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full opacity-10 blur-3xl"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-64 bg-gradient-to-r from-gray-100 to-gray-100 rounded-full opacity-10 blur-3xl"></div>
             </div>
 
             <div className="max-w-7xl mx-auto relative z-10">
@@ -148,51 +143,7 @@ const Stats = () => {
 
                 {/* Main Content - Desktop Layout */}
                 <div className="hidden lg:flex flex-row items-center justify-between gap-12">
-                    {/* Left Side - Stats Cards */}
-                    <motion.div
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}
-                        variants={containerVariants}
-                        className="w-1/2 grid grid-cols-2 gap-6"
-                    >
-                        {stats.map((stat, index) => (
-                            <motion.div
-                                key={index}
-                                variants={itemVariants}
-                                whileHover={{
-                                    y: -5,
-                                    boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
-                                }}
-                                className={`
-                                    bg-white p-6 rounded-xl shadow-md
-                                    border border-gray-200 group
-                                    transition-all duration-300
-                                    hover:border-amber-300 hover:shadow-lg
-                                    ${index < 2 ? 'mb-6' : ''}
-                                `}
-                            >
-                                <div className="relative z-10">
-                                    <div className="mb-4 flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 group-hover:bg-amber-200 transition-colors duration-300">
-                                        {React.cloneElement(stat.icon, {
-                                            className: `${stat.icon.props.className} text-amber-600 group-hover:text-amber-700`
-                                        })}
-                                    </div>
-
-                                    <h3 className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
-                                        {stat.value}
-                                    </h3>
-                                    <p className="text-lg font-medium text-gray-800 mb-2 leading-tight">
-                                        {stat.label}
-                                    </p>
-                                    <p className="text-sm text-gray-600 leading-snug">
-                                        {stat.description}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </motion.div>
-
-                    {/* Right Side - Vastu Chakra */}
+                    {/* left Side - Vastu Chakra */}
                     <motion.div
                         initial="hidden"
                         animate={inView ? "visible" : "hidden"}
@@ -285,6 +236,50 @@ const Stats = () => {
                                 }}
                             ></motion.div>
                         </div>
+                    </motion.div>
+
+                    {/* Right Side - Stats Cards */}
+                    <motion.div
+                        initial="hidden"
+                        animate={inView ? "visible" : "hidden"}
+                        variants={containerVariants}
+                        className="w-1/2 grid grid-cols-2 gap-6"
+                    >
+                        {stats.map((stat, index) => (
+                            <motion.div
+                                key={index}
+                                variants={itemVariants}
+                                whileHover={{
+                                    y: -5,
+                                    boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)",
+                                }}
+                                className={`
+                                    bg-white p-6 rounded-xl shadow-md
+                                    border border-gray-200 group
+                                    transition-all duration-300
+                                    hover:border-amber-300 hover:shadow-lg
+                                    ${index < 2 ? 'mb-6' : ''}
+                                `}
+                            >
+                                <div className="relative z-10">
+                                    <div className="mb-4 flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 group-hover:bg-amber-200 transition-colors duration-300">
+                                        {React.cloneElement(stat.icon, {
+                                            className: `${stat.icon.props.className} text-amber-600 group-hover:text-amber-700`
+                                        })}
+                                    </div>
+
+                                    <h3 className="text-3xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
+                                        {stat.value}
+                                    </h3>
+                                    <p className="text-lg font-medium text-gray-800 mb-2 leading-tight">
+                                        {stat.label}
+                                    </p>
+                                    <p className="text-sm text-gray-600 leading-snug">
+                                        {stat.description}
+                                    </p>
+                                </div>
+                            </motion.div>
+                        ))}
                     </motion.div>
                 </div>
 

@@ -31,37 +31,37 @@ function About() {
             id: 1,
             name: "Er. Purvesh R. Sakarkar",
             title: "Civil Engineer",
-            image: "nande.JPG",
+            image: "/nande.JPG",
             shortBio: "Structural design expert bringing innovative engineering solutions to complex projects.",
             fullBio: "With expertise in structural design and analysis, Purvesh brings innovative engineering solutions to our most complex projects. His leadership ensures all structures exceed safety standards while maintaining architectural integrity.",
             quote: "Engineering isn't just about calculations—it's about creating structures that elevate human experience.",
             stats: [
-                { value: "5+", label: "Years Exp.", color: "orange" },
-                { value: "M.E", label: "Civil Eng.", color: "red" },
-                { value: "30+", label: "Projects", color: "pink" }
+                { value: "5+", label: "Years Exp.", color: "bg-orange-500" },
+                { value: "M.E", label: "Civil Eng.", color: "bg-red-500" },
+                { value: "30+", label: "Projects", color: "bg-pink-500" }
             ]
         },
         {
             id: 2,
             name: "Er. Bhushan V. Kale",
-            title: "Civil Engineering",
-            image: "nande.JPG",
+            title: "Civil Engineer",
+            image: "/nande.JPG",
             shortBio: "Sustainable construction specialist with focus on eco-friendly design practices.",
             fullBio: "Bhushan specializes in sustainable construction practices and eco-friendly design. His innovative approach to civil engineering has earned our company multiple green building certifications and industry recognition.",
             quote: "The best engineering solutions work with nature, not against it—balancing progress with preservation.",
             stats: [
-                { value: "5+", label: "Years Exp.", color: "blue" },
-                { value: "B.E", label: "Civil", color: "indigo" },
-                { value: "5+", label: "Awards", color: "purple" }
+                { value: "5+", label: "Years Exp.", color: "bg-blue-500" },
+                { value: "B.E", label: "Civil", color: "bg-indigo-500" },
+                { value: "5+", label: "Awards", color: "bg-purple-500" }
             ]
         }
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50" id='about'>
+        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" id='about'>
             {/* Hero Section with Modern Design */}
             <motion.div 
-                className="relative py-12 md:py-16 bg-black overflow-hidden"
+                className="relative py-16 md:py-24 bg-gradient-to-r from-gray-900 to-stone-800 overflow-hidden"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
@@ -69,16 +69,16 @@ function About() {
             >
                 <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
                     <motion.h1 
-                        className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-4"
+                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6"
                         variants={fadeIn}
                     >
-                        Building Dreams, Crafting Reality
+                        Building Dreams, <span className="text-stone-400">Crafting Reality</span>
                     </motion.h1>
                     <motion.p 
-                        className="text-base md:text-lg text-white opacity-90 max-w-2xl mx-auto"
+                        className="text-lg md:text-xl text-stone-200 opacity-90 max-w-3xl mx-auto"
                         variants={fadeIn}
                     >
-                        With over 20 years of excellence in construction, we transform visions into lasting structures.
+                        With over 5 years of excellence in construction, we transform visions into lasting structures.
                     </motion.p>
                 </div>
                 
@@ -97,16 +97,14 @@ function About() {
                 />
                 
                 {/* Decorative element */}
-                <div className="absolute bottom-0 left-0 w-full h-6 md:h-12 bg-gray-50" style={{
-                    clipPath: "polygon(0 100%, 100% 100%, 100% 0)"
-                }}></div>
+                <div className="absolute bottom-0 left-0 w-full h-12 md:h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
             </motion.div>
 
             {/* Content Section with Clean Design */}
-            <div className="py-8 md:py-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            <div className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
                 <div className="container mx-auto max-w-6xl">
                     <motion.div 
-                        className="flex flex-col md:flex-row items-center gap-6 md:gap-12"
+                        className="flex flex-col md:flex-row items-center gap-8 md:gap-16"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: "-100px" }}
@@ -114,44 +112,45 @@ function About() {
                     >
                         {/* Image Section */}
                         <motion.div 
-                            className="w-full md:w-5/12 relative mb-6 md:mb-0"
+                            className="w-full md:w-5/12 relative mb-8 md:mb-0"
                             variants={fadeIn}
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-gray-700 to-gray-900 rounded-lg transform rotate-2 scale-105 shadow-lg"></div>
+                            <div className="absolute inset-0 bg-gradient-to-r from-stone-600 to-stone-800 rounded-xl transform rotate-2 scale-105 shadow-2xl"></div>
                             <img
                                 src="/nande.JPG"
                                 alt="Construction Professional"
-                                className="relative w-full h-full object-cover rounded-lg border-2 border-white shadow-lg z-10"
+                                className="relative w-full h-full object-cover rounded-xl border-4 border-white shadow-xl z-10"
                             />
                             <motion.div 
-                                className="absolute -bottom-2 -right-2 bg-stone-500 text-white p-2 rounded-lg shadow-lg z-20 text-sm"
+                                className="absolute -bottom-4 -right-4 bg-stone-600 text-white px-4 py-2 rounded-lg shadow-lg z-20 text-sm font-bold"
                                 whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
                             >
-                                <p className="font-bold">20+ Years Excellence</p>
+                                5+ Years Excellence
                             </motion.div>
                         </motion.div>
 
                         {/* About Text */}
                         <motion.div 
-                            className="w-full md:w-7/12 space-y-4"
+                            className="w-full md:w-7/12 space-y-6"
                             variants={fadeIn}
                         >
-                            <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-                                <span className="text-stone-500">About</span> Our Company
+                            <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+                                <span className="text-stone-600">About</span> Our Company
                             </h2>
 
-                            <p className="text-base md:text-lg text-gray-700">
-                                Founded in 2003, <span className="font-semibold text-stone-400">Premier Construction</span> has been at the forefront of construction excellence, delivering high-quality residential and commercial projects across the region.
+                            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+                                Founded in 2020, <span className="font-semibold text-stone-600">Premier Construction</span> has been at the forefront of construction excellence, delivering high-quality residential and commercial projects across the region.
                             </p>
 
                             {/* Mission & Vision with Read More */}
                             <motion.div 
-                                className="bg-white backdrop-filter backdrop-blur-sm bg-opacity-70 p-4 rounded-lg shadow-md border-l-4 border-stone-500"
+                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border-l-4 border-stone-600"
                                 whileHover={{ boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <h3 className="text-xl font-semibold text-gray-800 mb-2">Our Mission & Vision</h3>
-                                <p className="text-gray-700 text-sm md:text-base">
+                                <h3 className="text-2xl font-semibold text-gray-800 mb-4">Our Mission & Vision</h3>
+                                <p className="text-gray-700 text-base md:text-lg leading-relaxed">
                                     {showFullMission ? (
                                         <>
                                             To build sustainable, safe, and aesthetically pleasing structures while maintaining the highest standards of quality and client satisfaction. We aim to be the region's most trusted construction partner, known for integrity, innovation, and excellence in every project we undertake. Our vision encompasses creating spaces that positively impact communities while embracing cutting-edge construction technologies.
@@ -163,12 +162,13 @@ function About() {
                                     )}
                                 </p>
                                 <motion.button
-                                    className="mt-2 text-stone-600 text-sm font-medium flex items-center hover:text-stone-700"
+                                    className="mt-4 text-stone-700 text-base font-medium flex items-center hover:text-stone-800 group"
                                     onClick={() => setShowFullMission(!showFullMission)}
                                     whileHover={{ scale: 1.03 }}
+                                    whileTap={{ scale: 0.97 }}
                                 >
                                     {showFullMission ? 'Show Less' : 'Read More'}
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         {showFullMission ? (
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                                         ) : (
@@ -182,79 +182,84 @@ function About() {
 
                     {/* Engineers Section - Modern Card Design */}
                     <motion.div 
-                        className="mt-12 md:mt-16"
+                        className="mt-16 md:mt-20"
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: "-100px" }}
                         variants={staggerChildren}
                     >
                         <motion.h2 
-                            className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-6 md:mb-8"
+                            className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10 md:mb-12"
                             variants={fadeIn}
                         >
-                            <span className="text-stone-500">Meet</span> Our Lead Engineers
+                            <span className="text-stone-600">Meet</span> Our Lead Engineers
                         </motion.h2>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             {engineers.map((engineer) => (
                                 <motion.div 
                                     key={engineer.id}
-                                    className="relative bg-white bg-opacity-50 backdrop-filter backdrop-blur-md rounded-xl shadow-lg overflow-hidden group"
+                                    className="relative rounded-2xl overflow-hidden group"
                                     variants={fadeIn}
-                                    whileHover={{ y: -5 }}
+                                    whileHover={{ y: -8 }}
                                     transition={{ duration: 0.3 }}
                                 >
-                                    <div className="relative h-52">
-                                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-60"></div>
+                                    {/* Glassy Card Background */}
+                                    <div className="absolute inset-0 bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl shadow-xl"></div>
+                                    
+                                    <div className="relative h-64">
+                                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-10"></div>
                                         <img
                                             src={engineer.image}
                                             alt={engineer.name}
                                             className="w-full h-full object-cover object-center"
                                         />
-                                        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                                            <h3 className="text-xl font-bold mb-1 drop-shadow-md">{engineer.name}</h3>
-                                            <p className="text-sm font-medium bg-black bg-opacity-40 inline-block px-2 py-1 rounded-full">
+                                        <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20">
+                                            <h3 className="text-2xl font-bold mb-1 drop-shadow-lg">{engineer.name}</h3>
+                                            <p className="text-base font-medium bg-white/20 backdrop-blur-sm inline-block px-4 py-1 rounded-full border border-white/30">
                                                 {engineer.title}
                                             </p>
                                         </div>
                                     </div>
                                     
-                                    <div className="p-4">
-                                        <div className="flex flex-wrap gap-2 mb-3">
+                                    <div className="p-6 relative z-10">
+                                        <div className="flex flex-wrap gap-3 mb-4">
                                             {engineer.stats.map((stat, index) => (
                                                 <div 
                                                     key={index} 
-                                                    className={`bg-${stat.color}-100 p-1.5 rounded-md text-center w-22`}
+                                                    className={`${stat.color} text-white px-4 py-2 rounded-lg shadow-md text-center min-w-[80px]`}
                                                 >
-                                                    <span className={`font-bold text-${stat.color}-600 text-xs`}> {stat.value}  <p className={`text-${stat.color}-800 text-xs`}>  {stat.label}</p></span>
+                                                    <span className="font-bold text-lg">{stat.value}</span>
+                                                    <p className="text-xs font-medium">{stat.label}</p>
                                                 </div>
                                             ))}
                                         </div>
                                         
-                                        <p className="text-gray-700 text-sm">
+                                        <p className="text-gray-800 text-base mb-4">
                                             {expandedCard === engineer.id ? engineer.fullBio : engineer.shortBio}
                                         </p>
                                         
                                         {expandedCard === engineer.id && (
                                             <motion.div 
-                                                className="mt-3 pt-3 border-t border-gray-200"
+                                                className="mt-4 pt-4 border-t border-white/30"
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 transition={{ duration: 0.3 }}
                                             >
-                                                <p className="italic text-gray-600 text-xs">
+                                                <p className="italic text-gray-700 text-base">
                                                     "{engineer.quote}"
                                                 </p>
                                             </motion.div>
                                         )}
                                         
                                         <motion.button
-                                            className="mt-3 text-orange-600 text-xs font-medium flex items-center hover:text-orange-700"
+                                            className="mt-4 text-stone-700 text-base font-medium flex items-center hover:text-stone-800 group"
                                             onClick={() => setExpandedCard(expandedCard === engineer.id ? null : engineer.id)}
                                             whileHover={{ scale: 1.03 }}
+                                            whileTap={{ scale: 0.97 }}
                                         >
                                             {expandedCard === engineer.id ? 'Show Less' : 'Read More'}
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 {expandedCard === engineer.id ? (
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                                                 ) : (

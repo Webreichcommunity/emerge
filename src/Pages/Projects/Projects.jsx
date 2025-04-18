@@ -1,457 +1,690 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
+import { ourProjects } from '../../Data/OurProjects';
 import { Link } from 'react-router-dom';
 
-// Sample project data based on your format
-const sampleProjects = [
-  {
-    id: 1,
-    slug: "techhub-innovation-center",
-    title: "TechHub Innovation Center",
-    shortDescription: "A state-of-the-art innovation center for tech startups and research teams.",
-    client: "TechCorp Solutions",
-    year: "2023",
-    category: "Commercial",
-    totalArea: "4,050 Sq.Ft.",
-    budget: "₹62,00,000",
-    totalSqFt: "50,000",
-    totalCost: "$10M",
-    mainImage: "/nande.JPG",
-  },
-  {
-    id: 2,
-    slug: "luxury-villa-retreat",
-    title: "Luxury Villa Retreat",
-    shortDescription: "An exclusive residential villa with premium amenities and sustainable design.",
-    client: "Private Owner",
-    year: "2022",
-    category: "Residential",
-    totalArea: "6,200 Sq.Ft.",
-    budget: "₹95,00,000",
-    totalSqFt: "6,200",
-    totalCost: "$2.5M",
-    mainImage: "https://images.pexels.com/photos/1624990/pexels-photo-1624990.jpeg",
-  },
-  {
-    id: 3,
-    slug: "urban-loft-apartments",
-    title: "Urban Loft Apartments",
-    shortDescription: "Modern urban living spaces with innovative space utilization and luxury finishes.",
-    client: "Metropolitan Developers",
-    year: "2023",
-    category: "Residential",
-    totalArea: "12,500 Sq.Ft.",
-    budget: "₹1,80,00,000",
-    totalSqFt: "12,500",
-    totalCost: "$4.8M",
-    mainImage: "https://images.pexels.com/photos/5506051/pexels-photo-5506051.jpeg",
-  },
-  {
-    id: 4,
-    slug: "corporate-headquarters",
-    title: "Corporate Headquarters",
-    shortDescription: "A sustainable corporate campus with cutting-edge facilities and green spaces.",
-    client: "Global Enterprises",
-    year: "2022",
-    category: "Commercial",
-    totalArea: "75,000 Sq.Ft.",
-    budget: "₹12,50,00,000",
-    totalSqFt: "75,000",
-    totalCost: "$15M",
-    mainImage: "https://images.pexels.com/photos/30083651/pexels-photo-30083651/free-photo-of-modern-architectural-marvel-in-daylight.jpeg",
-  }
-];
-
 const Projects = () => {
-  // For viewport detection
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
-  const controls = useAnimation();
+    // For viewport detection
+    const ref = useRef(null);
+    const projectsRef = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-50px" });
+    const controls = useAnimation();
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const [maxScroll, setMaxScroll] = useState(0);
 
-  // State for category filtering
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [filteredProjects, setFilteredProjects] = useState([]);
-  const categories = ['all', 'Residential', 'Commercial'];
+    // State for category filtering
+    const [activeCategory, setActiveCategory] = useState('all');
+    const [filteredProjects, setFilteredProjects] = useState([]);
+    const [categories, setCategories] = useState(['all']);
 
-  // Handle animation when in view
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
+    // Handle animation when in view
+    useEffect(() => {
+        if (isInView) {
+            controls.start("visible");
+        }
+    }, [isInView, controls]);
 
-  // Set initial filtered projects
-  useEffect(() => {
-    setFilteredProjects(sampleProjects);
-  }, []);
+    // Update max scroll value when projects are filtered
+    useEffect(() => {
+        if (projectsRef.current) {
+            setMaxScroll(projectsRef.current.scrollWidth - projectsRef.current.clientWidth);
+        }
+    }, [projectsRef, filteredProjects]);
 
-  // Handle category change
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category);
+    // Extract categories and set initial filtered projects
+    useEffect(() => {
+        // Extract unique categories
+        const allCategories = ourProjects.map(project => project.category || project.industry);
+        const uniqueCategories = ['all', ...new Set(allCategories.filter(Boolean))];
+        setCategories(uniqueCategories);
 
-    // Filter projects based on selected category
-    if (category === 'all') {
-      setFilteredProjects(sampleProjects);
-    } else {
-      const filtered = sampleProjects.filter(project => project.category === category);
-      setFilteredProjects(filtered);
-    }
-  };
+        // Initialize with all projects
+        setFilteredProjects(ourProjects);
+    }, []);
 
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
-    }
-  };
+    // Handle scroll navigation
+    const handleScroll = (direction) => {
+        if (projectsRef.current) {
+            const scrollAmount = window.innerWidth > 768 ? 600 : 300;
+            const newPosition = direction === 'right'
+                ? Math.min(scrollPosition + scrollAmount, maxScroll)
+                : Math.max(scrollPosition - scrollAmount, 0);
 
-  const cardVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: (i) => ({
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-        delay: i * 0.1
-      }
-    }),
-    hover: {
-      y: -10,
-      scale: 1.05,
-      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1)",
-      transition: { duration: 0.3, ease: "easeInOut" }
-    }
-  };
+            projectsRef.current.scrollTo({
+                left: newPosition,
+                behavior: 'smooth'
+            });
+            setScrollPosition(newPosition);
+        }
+    };
 
-  const filterContainerVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        when: "beforeChildren",
-        staggerChildren: 0.05
-      }
-    }
-  };
+    // Track scroll position for navigation button states
+    const handleProjectsScroll = () => {
+        if (projectsRef.current) {
+            setScrollPosition(projectsRef.current.scrollLeft);
+        }
+    };
 
-  const filterItemVariants = {
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.3 }
-    },
-    active: {
-      scale: 1.05,
-      backgroundColor: "#000000",
-      color: "#ffffff",
-      boxShadow: "0 5px 15px rgba(0, 0, 0, 0.5)"
-    },
-    tap: { scale: 0.95 }
-  };
+    // Handle category change
+    const handleCategoryChange = (category) => {
+        setActiveCategory(category);
 
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden text-gray-900"
-      style={{
-        background: `
-          radial-gradient(circle at 70% 80%, rgba(0,0,0,0.2) 0%, transparent 25%),
-          radial-gradient(circle at 20% 20%, rgba(120,113,108,0.3) 0%, transparent 30%),
-          linear-gradient(135deg, #f5f5f4 0%, #e7e5e4 50%, #d6d3d1 100%)
-        `
-      }}
-      id='projects'
-      ref={ref}
-    >
-      <div className="max-w-7xl mx-auto">
-        {/* Heading Section */}
+        // Filter projects based on selected category
+        if (category === 'all') {
+            setFilteredProjects(ourProjects);
+        } else {
+            const filtered = ourProjects.filter(project =>
+                (project.category === category) || (project.industry === category)
+            );
+            setFilteredProjects(filtered);
+        }
+
+        // Reset scroll position when changing category
+        if (projectsRef.current) {
+            projectsRef.current.scrollTo({
+                left: 0,
+                behavior: 'smooth'
+            });
+            setScrollPosition(0);
+        }
+    };
+
+    // Animation variants
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.2
+            }
+        }
+    };
+
+    const cardVariants = {
+        hidden: { y: 30, opacity: 0 },
+        visible: (i) => ({
+            y: 0,
+            opacity: 1,
+            transition: {
+                duration: 0.5,
+                ease: "easeOut",
+                delay: i * 0.1
+            }
+        }),
+        hover: {
+            y: -10,
+            scale: 1.05,
+            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1)",
+            transition: {
+                duration: 0.3,
+                ease: "easeInOut"
+            }
+        }
+    };
+
+    const buttonVariants = {
+        initial: {
+            scale: 1,
+            backgroundColor: "rgba(120, 113, 108, 0.9)",
+            color: "#ffffff",
+            boxShadow: "0 0 0 rgba(120, 113, 108, 0.1)"
+        },
+        hover: {
+            scale: 1.03,
+            backgroundColor: "#ffffff",
+            color: "#1f2937", // Change to gray-800
+            boxShadow: "0 0 15px rgba(31, 41, 55, 0.4)",
+            transition: {
+                duration: 0.2,
+                ease: "easeInOut"
+            }
+        },
+        tap: {
+            scale: 0.97
+        }
+    };
+
+    const headingVariants = {
+        hidden: { opacity: 0, y: -20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    const statVariants = {
+        hidden: { opacity: 0, scale: 0.8 },
+        visible: (i) => ({
+            opacity: 1,
+            scale: 1,
+            transition: {
+                duration: 0.4,
+                delay: 0.2 + (i * 0.1),
+                type: "spring",
+                stiffness: 100
+            }
+        }),
+        hover: {
+            scale: 1.05,
+            y: -5,
+            transition: {
+                type: "spring",
+                stiffness: 300
+            }
+        }
+    };
+
+    const navButtonVariants = {
+        hidden: { opacity: 0, scale: 0.8 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+                duration: 0.3,
+                type: "spring",
+                stiffness: 200
+            }
+        },
+        hover: {
+            scale: 1.1,
+            boxShadow: "0 0 15px rgba(31, 41, 55, 0.5)",
+            transition: {
+                type: "spring",
+                stiffness: 400
+            }
+        },
+        tap: {
+            scale: 0.95
+        }
+    };
+
+    const filterContainerVariants = {
+        hidden: { opacity: 0, y: -20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                when: "beforeChildren",
+                staggerChildren: 0.05
+            }
+        }
+    };
+
+    const filterItemVariants = {
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.3 }
+        },
+        active: {
+            scale: 1.05,
+            backgroundColor: "#1f2937", // Changed to gray-800
+            color: "#ffffff",
+            boxShadow: "0 5px 15px rgba(31, 41, 55, 0.5)"
+        },
+        tap: { scale: 0.95 }
+    };
+
+    return (
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-16"
-        >
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-stone-800 to-stone-600"
-          >
-            Our Projects
-          </motion.h2>
-          <motion.div
-            initial={{ width: "0%" }}
-            animate={isInView ? { width: "100%" } : {}}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="h-1 bg-gradient-to-r from-stone-500 to-black rounded-full mx-auto mt-1"
-            style={{ maxWidth: "120px" }}
-          />
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-base sm:text-lg text-stone-700 max-w-3xl mx-auto mt-4 px-4"
-          >
-            Explore our curated selection of exceptional projects that showcase our expertise and commitment to excellence.
-          </motion.p>
-        </motion.div>
-
-        {/* Category Filter Tabs */}
-        <motion.div
-          variants={filterContainerVariants}
-          initial="hidden"
-          animate={controls}
-          className="mb-12"
-        >
-          <div className="w-full text-center mb-5">
-            <h3 className="text-lg font-medium text-gray-800">Browse by category</h3>
-          </div>
-          <div className="flex flex-wrap justify-center gap-3 px-2 max-w-4xl mx-auto">
-            {categories.map((category, index) => (
-              <motion.button
-                key={category}
-                variants={filterItemVariants}
-                initial="hidden"
-                animate={activeCategory === category ? "active" : "visible"}
-                whileHover={activeCategory !== category ? { scale: 1.05, backgroundColor: "rgba(0, 0, 0, 0.1)" } : {}}
-                whileTap="tap"
-                onClick={() => handleCategoryChange(category)}
-                className={`px-5 py-2.5 text-sm rounded-full border transition-all duration-300 backdrop-blur-sm ${
-                  activeCategory === category
-                    ? 'bg-stone-700 text-white border-stone-700 shadow-md font-medium'
-                    : 'bg-white/40 text-gray-800 border-stone-200 hover:border-stone-400'
-                }`}
-              >
-                {category === 'all' ? 'All Projects' : category}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Empty state for when no projects match the filter */}
-        {filteredProjects.length === 0 && (
-          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-16 px-4"
-          >
-            <div className="bg-white/40 backdrop-blur-sm rounded-xl p-8 max-w-md mx-auto shadow-lg border border-white/50">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-stone-500 mx-auto mb-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">No projects found</h3>
-              <p className="text-gray-600 mb-5">We couldn't find any projects matching this category.</p>
-              <button
-                onClick={() => handleCategoryChange('all')}
-                className="px-5 py-2.5 bg-stone-600 text-white rounded-lg hover:bg-stone-700 transition-colors shadow-md"
-              >
-                View all projects
-              </button>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Projects Grid - 2x2 Layout */}
-        {filteredProjects.length > 0 && (
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate={controls}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8"
-          >
-            {filteredProjects.slice(0, 4).map((project, index) => (
-              <motion.div
-                key={project.id}
-                custom={index}
-                variants={cardVariants}
-                whileHover="hover"
-                className="bg-white/30 backdrop-blur-lg rounded-xl overflow-hidden shadow-lg border border-white/50"
-                style={{
-                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.6)'
-                }}
-              >
-                {/* Project Image with enhanced overlay */}
-                <div className="h-52 sm:h-56 overflow-hidden relative">
-                  <motion.img
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.5 }}
-                    src={project.mainImage}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                  {/* Category Badge */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.2 }}
-                    className="absolute bottom-3 left-3 flex gap-2"
-                  >
-                    <span className="bg-stone-500 text-white text-xs px-3 py-1 rounded-full font-medium shadow-md">
-                      {project.category}
-                    </span>
-                  </motion.div>
-                </div>
-
-                {/* Project Details */}
-                <div className="p-5 relative">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-bold text-gray-900 line-clamp-1">{project.title}</h3>
-                  </div>
-
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {project.shortDescription}
-                  </p>
-
-                  {/* Project Stats */}
-                  <div className="grid grid-cols-2 gap-3 mt-4 mb-4">
-                    <motion.div
-                      whileHover={{ scale: 1.03 }}
-                      className="bg-white/60 rounded-lg p-3 text-center shadow-sm border border-white/60"
-                    >
-                      <p className="text-xs text-stone-500 font-medium">Total Area</p>
-                      <p className="text-sm font-bold text-gray-900">{project.totalSqFt || project.totalArea || "N/A"}</p>
-                    </motion.div>
-                    <motion.div
-                      whileHover={{ scale: 1.03 }}
-                      className="bg-white/60 rounded-lg p-3 text-center shadow-sm border border-white/60"
-                    >
-                      <p className="text-xs text-stone-500 font-medium">Budget</p>
-                      <p className="text-sm font-bold text-gray-900">{project.budget || project.totalCost || "N/A"}</p>
-                    </motion.div>
-                  </div>
-
-                  <div className="flex justify-between items-center text-gray-800 mb-5">
-                    <div>
-                      <p className="text-xs text-stone-500 font-medium">Client</p>
-                      <p className="text-sm font-medium">{project.client}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-xs text-stone-500 font-medium">Year</p>
-                      <p className="text-sm font-medium">{project.year}</p>
-                    </div>
-                  </div>
-
-                  {/* View Project Button */}
-                  <Link to={`/ourwork/${project.slug}`} className="block">
-                    <motion.button
-                      whileHover={{
-                        scale: 1.03,
-                        backgroundColor: "#ffffff",
-                        color: "#78716c",
-                        boxShadow: "0 0 15px rgba(0, 0, 0, 0.4)",
-                      }}
-                      whileTap={{ scale: 0.97 }}
-                      className="w-full block text-center border border-stone-500 bg-stone-500 text-white py-3 px-4 rounded-lg font-medium relative overflow-hidden"
-                    >
-                      <motion.span
-                        initial={{ opacity: 0 }}
-                        whileHover={{
-                          opacity: [0, 0.5, 0],
-                          scale: [1, 1.5],
-                          transition: { duration: 1.5, repeat: Infinity, repeatType: "loop" }
-                        }}
-                        className="absolute inset-0 bg-black/20 rounded-lg"
-                      />
-                      View Project Details
-                    </motion.button>
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-
-        {/* View All CTA Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-12 text-center"
+            className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden text-gray-900"
+            style={{
+                background: `
+                    radial-gradient(circle at 70% 80%, rgba(107, 114, 128, 0.3) 0%, transparent 25%),
+                    radial-gradient(circle at 20% 20%, rgba(156, 163, 175, 0.3) 0%, transparent 30%),
+                    linear-gradient(135deg, #ffffff 0%, #f9fafb 50%, #f3f4f6 100%)
+                `
+            }}
+            id='projects'
+            ref={ref}
         >
-          <Link to="/ourwork">
-            <motion.button
-              whileHover={{
-                scale: 1.03,
-                boxShadow: "0 0 25px rgba(0, 0, 0, 0.4)"
-              }}
-              whileTap={{ scale: 0.97 }}
-              className="bg-gradient-to-r from-black to-stone-700 text-white font-medium py-4 px-10 rounded-lg inline-flex items-center shadow-lg"
-            >
-              View All Projects
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </motion.button>
-          </Link>
-        </motion.div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial="hidden"
-          animate={controls}
-          variants={containerVariants}
-          className="mt-16 sm:mt-24 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6"
-        >
-          {[
-            { value: "50+", label: "Projects Completed", icon: "📊" },
-            { value: "25", label: "Happy Clients", icon: "🤝" },
-            { value: "15", label: "Industry Awards", icon: "🏆" },
-            { value: "100%", label: "Client Satisfaction", icon: "⭐" }
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              custom={index}
-              variants={cardVariants}
-              whileHover={{ scale: 1.03 }}
-              className="p-4 rounded-xl relative overflow-hidden group"
-            >
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="absolute inset-0 bg-white/40 backdrop-blur-sm rounded-xl border border-white/50"
-                style={{
-                  boxShadow: '0 8px 20px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.7)'
-                }}
-              />
-
-              <motion.div
-                initial={{ y: 10, opacity: 0 }}
-                animate={isInView ? { y: 0, opacity: 1 } : {}}
-                transition={{ delay: 0.3 + (index * 0.1) }}
-                className="relative z-10 text-center"
-              >
-                <span className="block text-2xl mb-1 sm:hidden">{stat.icon}</span>
+            <div className="max-w-7xl mx-auto">
+                {/* Heading Section with enhanced animation */}
                 <motion.div
-                  initial={{ scale: 1 }}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-black to-stone-600"
+                    variants={headingVariants}
+                    initial="hidden"
+                    animate={controls}
+                    className="text-center mb-12 sm:mb-16"
                 >
-                  {stat.value}
+                    <motion.div
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="relative inline-block"
+                    >
+                        <motion.h2 
+                            className="text-3xl md:text-4xl font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-gray-900 to-stone-500"
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.1 }}
+                            viewport={{ once: true }}
+                        >
+                            Our Projects
+                        </motion.h2>
+                        <motion.div
+                            initial={{ width: "0%" }}
+                            animate={isInView ? { width: "100%" } : {}}
+                            transition={{ duration: 0.8, delay: 0.6 }}
+                            className="h-1 bg-gradient-to-r from-gray-800 to-stone-500 rounded-full mx-auto mt-1"
+                            style={{ maxWidth: "120px" }}
+                        />
+                    </motion.div>
+                    <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="text-base sm:text-lg text-gray-700 max-w-3xl mx-auto mt-4 px-4"
+                    >
+                        Explore our curated selection of exceptional projects that showcase our expertise and commitment to excellence.
+                    </motion.p>
                 </motion.div>
-                <div className="text-sm sm:text-base text-gray-800 mt-1">{stat.label}</div>
 
+                {/* Category Filter Tabs - Enhanced with pill design */}
                 <motion.div
-                  initial={{ width: 0 }}
-                  animate={isInView ? { width: "60%" } : {}}
-                  transition={{ duration: 0.7, delay: 0.5 + (index * 0.1) }}
-                  className="h-0.5 bg-stone-500 mx-auto mt-2 rounded-full"
-                />
-              </motion.div>
-            </motion.div>
-          ))}
-        </motion.div>
+                    variants={filterContainerVariants}
+                    initial="hidden"
+                    animate={controls}
+                    className="mb-12"
+                >
+                    <div className="w-full text-center mb-5">
+                        <h3 className="text-lg font-medium text-gray-800">Browse by category</h3>
+                    </div>
+                    <div className="flex flex-wrap justify-center gap-3 px-2 max-w-4xl mx-auto">
+                        {categories.map((category, index) => (
+                            <motion.button
+                                key={category}
+                                variants={filterItemVariants}
+                                initial="hidden"
+                                animate={activeCategory === category ? "active" : "visible"}
+                                whileHover={activeCategory !== category ? { scale: 1.05, backgroundColor: "rgba(107, 114, 128, 0.15)" } : {}}
+                                whileTap="tap"
+                                onClick={() => handleCategoryChange(category)}
+                                className={`px-5 py-2.5 text-sm rounded-full border transition-all duration-300 backdrop-blur-sm ${
+                                    activeCategory === category
+                                        ? 'bg-gray-800 text-white border-gray-800 shadow-md font-medium'
+                                        : 'bg-white/50 text-gray-800 border-gray-200 hover:border-gray-400'
+                                }`}
+                            >
+                                {category === 'all' ? 'All Projects' : category}
+                            </motion.button>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* Empty state for when no projects match the filter */}
+                {filteredProjects.length === 0 && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        className="text-center py-16 px-4"
+                    >
+                        <div className="bg-white/50 backdrop-blur-sm rounded-xl p-8 max-w-md mx-auto shadow-lg border border-white/50">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-gray-500 mx-auto mb-4 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <h3 className="text-xl font-bold text-gray-800 mb-2">No projects found</h3>
+                            <p className="text-gray-600 mb-5">We couldn't find any projects matching this category.</p>
+                            <button
+                                onClick={() => handleCategoryChange('all')}
+                                className="px-5 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors shadow-md"
+                            >
+                                View all projects
+                            </button>
+                        </div>
+                    </motion.div>
+                )}
+
+                {/* Projects - With horizontal scroll navigation */}
+                {filteredProjects.length > 0 && (
+                    <div className="relative -mx-4">
+                        {/* Desktop Navigation Buttons */}
+                        <div className="hidden sm:block">
+                            <motion.button
+                                variants={navButtonVariants}
+                                initial="hidden"
+                                animate={controls}
+                                whileHover="hover"
+                                whileTap="tap"
+                                onClick={() => handleScroll('left')}
+                                disabled={scrollPosition <= 0}
+                                className={`absolute left-2 top-1/2 z-10 transform -translate-y-1/2 p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg ${scrollPosition <= 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                aria-label="Scroll left"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </motion.button>
+                            <motion.button
+                                variants={navButtonVariants}
+                                initial="hidden"
+                                animate={controls}
+                                whileHover="hover"
+                                whileTap="tap"
+                                onClick={() => handleScroll('right')}
+                                disabled={scrollPosition >= maxScroll}
+                                className={`absolute right-2 top-1/2 z-10 transform -translate-y-1/2 p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-lg ${scrollPosition >= maxScroll ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                aria-label="Scroll right"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </motion.button>
+                        </div>
+
+                        {/* Project Cards - Horizontal Scrolling Container */}
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate={controls}
+                            className="flex overflow-x-auto snap-x snap-mandatory scrolling-touch pb-8 px-4 no-scrollbar"
+                            ref={projectsRef}
+                            onScroll={handleProjectsScroll}
+                            style={{
+                                scrollbarWidth: 'none',
+                                msOverflowStyle: 'none'
+                            }}
+                        >
+                            {filteredProjects.map((project, index) => (
+                                <motion.div
+                                    key={project.id}
+                                    custom={index}
+                                    variants={cardVariants}
+                                    whileHover="hover"
+                                    className="flex-shrink-0 w-[320px] sm:w-[380px] mx-3 sm:mx-4 snap-center bg-white/40 backdrop-blur-xl rounded-xl overflow-hidden shadow-lg border border-white/70"
+                                    style={{
+                                        scrollSnapAlign: 'center',
+                                        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.8)'
+                                    }}
+                                >
+                                    {/* Project Image with enhanced overlay */}
+                                    <div className="h-56 sm:h-60 overflow-hidden relative">
+                                        <motion.img
+                                            whileHover={{ scale: 1.05 }}
+                                            transition={{ duration: 0.5 }}
+                                            src={project.imageUrl || project.mainImage}
+                                            alt={project.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                                        {/* Category Badge */}
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.4, delay: 0.2 }}
+                                            className="absolute bottom-3 left-3 flex gap-2"
+                                        >
+                                            <span className="bg-stone-500 text-white text-xs px-3 py-1 rounded-full font-medium shadow-md">
+                                                {project.category || project.industry}
+                                            </span>
+                                        </motion.div>
+                                    </div>
+
+                                    {/* Project Details - Enhanced with glass effect */}
+                                    <div className="p-5 relative">
+                                        <div className="flex justify-between items-start mb-2">
+                                            <h3 className="text-xl font-bold text-gray-900 line-clamp-1">{project.title}</h3>
+                                        </div>
+
+                                        {/* Location with icon */}
+                                        <div className="flex items-center text-gray-700 text-xs mb-3">
+                                            <span className="flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                </svg>
+                                                {project.address || project.location}
+                                            </span>
+                                        </div>
+
+                                        {/* Project description */}
+                                        <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                                            {project.shortDescription || project.summary}
+                                        </p>
+
+                                        {/* Project Stats Grid - Enhanced with icons */}
+                                        <div className="grid grid-cols-2 gap-3 mt-4 mb-4">
+                                            {/* Timeline */}
+                                            <motion.div
+                                                whileHover={{ scale: 1.03 }}
+                                                className="bg-white/70 rounded-lg p-3 shadow-sm border border-white/70 flex items-center"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-700 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                <div>
+                                                    <p className="text-xs text-gray-500 font-medium">Timeline</p>
+                                                    <p className="text-sm font-bold text-gray-900">{project.timeline}</p>
+                                                </div>
+                                            </motion.div>
+                                            
+                                            {/* Category */}
+                                            <motion.div
+                                                whileHover={{ scale: 1.03 }}
+                                                className="bg-white/70 rounded-lg p-3 shadow-sm border border-white/70 flex items-center"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-700 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                                </svg>
+                                                <div>
+                                                    <p className="text-xs text-gray-500 font-medium">Category</p>
+                                                    <p className="text-sm font-bold text-gray-900">{project.category}</p>
+                                                </div>
+                                            </motion.div>
+                                            
+                                            {/* Total Area */}
+                                            <motion.div
+                                                whileHover={{ scale: 1.03 }}
+                                                className="bg-white/70 rounded-lg p-3 shadow-sm border border-white/70 flex items-center"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-700 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+                                                </svg>
+                                                <div>
+                                                    <p className="text-xs text-gray-500 font-medium">Total Area</p>
+                                                    <p className="text-sm font-bold text-gray-900">{project.totalArea || project.totalSqFt || "N/A"}</p>
+                                                </div>
+                                            </motion.div>
+                                            
+                                            {/* Budget */}
+                                            <motion.div
+                                                whileHover={{ scale: 1.03 }}
+                                                className="bg-white/70 rounded-lg p-3 shadow-sm border border-white/70 flex items-center"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-700 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                </svg>
+                                                <div>
+                                                    <p className="text-xs text-gray-500 font-medium">Budget</p>
+                                                    <p className="text-sm font-bold text-gray-900">{project.budget || project.totalCost || "N/A"}</p>
+                                                </div>
+                                            </motion.div>
+                                        </div>
+
+                                        {/* Client and Year */}
+                                        <div className="flex justify-between items-center text-gray-800 mb-5">
+                                            <div className="flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-700 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                                </svg>
+                                                <div>
+                                                    <p className="text-xs text-gray-500 font-medium">Client</p>
+                                                    <p className="text-sm font-medium">{project.client}</p>
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-700 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                                <div>
+                                                    <p className="text-xs text-gray-500 font-medium">Year</p>
+                                                    <p className="text-sm font-medium">{project.year || (project.startDate && project.endDate ? `${project.startDate} - ${project.endDate}` : "N/A")}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Enhanced Button with Pulse Effect */}
+                                        <Link to={`/ourwork/${project.slug}`} className="block">
+                                            <motion.button
+                                                variants={buttonVariants}
+                                                initial="initial"
+                                                whileHover="hover"
+                                                whileTap="tap"
+                                                className="w-full block text-center border border-gray-800 py-3 px-4 rounded-lg font-medium relative overflow-hidden"
+                                            >
+                                                <motion.span
+                                                    initial={{ opacity: 0 }}
+                                                    whileHover={{
+                                                        opacity: [0, 0.5, 0],
+                                                        scale: [1, 1.5],
+                                                        transition: { duration: 1.5, repeat: Infinity, repeatType: "loop" }
+                                                    }}
+                                                    className="absolute inset-0 bg-gray-400/20 rounded-lg"
+                                                />
+                                                View Project Details
+                                            </motion.button>
+                                        </Link>
+                                    </div>
+                                </motion.div>
+                            ))}
+
+                            {/* Extra blank space at end for better UX */}
+                            <div className="flex-shrink-0 w-4 sm:w-8 h-1"></div>
+                        </motion.div>
+
+                        {/* Scroll Indicator for Mobile */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{
+                                opacity: [0.4, 0.8, 0.4],
+                                x: [0, 10, 0]
+                            }}
+                            transition={{
+                                duration: 1.5,
+                                repeat: Infinity,
+                                repeatType: "loop"
+                            }}
+                            className="flex items-center justify-center mt-2 sm:hidden"
+                        >
+                            <span className="text-xs text-stone-600 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                                Swipe to view more
+                            </span>
+                        </motion.div>
+                    </div>
+                )}
+
+                {/* Stats Section with Enhanced Glassmorphism */}
+                <motion.div
+                    initial="hidden"
+                    animate={controls}
+                    variants={containerVariants}
+                    className="mt-16 sm:mt-24 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6"
+                >
+                    {[
+                        { 
+                            value: "50+", 
+                            label: "Projects Completed", 
+                            icon: (
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                          </svg>
+                      ),
+                  },
+                  { 
+                      value: "12+", 
+                      label: "Years of Experience", 
+                      icon: (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                      ),
+                  },
+                  { 
+                      value: "30+", 
+                      label: "Happy Clients", 
+                      icon: (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                      ),
+                  },
+                  { 
+                      value: "7", 
+                      label: "Design Awards", 
+                      icon: (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                          </svg>
+                      ),
+                  },
+              ].map((stat, index) => (
+                  <motion.div
+                      key={index}
+                      custom={index}
+                      variants={statVariants}
+                      whileHover="hover"
+                      className="bg-white/30 backdrop-blur-sm rounded-xl p-6 border border-white/50 shadow-lg"
+                  >
+                      <div className="flex flex-col items-center justify-center text-center space-y-3">
+                          <div className="p-3 bg-gray-100/90 rounded-full">
+                              {stat.icon}
+                          </div>
+                          <motion.h3 
+                              className="text-2xl sm:text-3xl font-bold text-gray-900"
+                              initial={{ opacity: 0, y: 20 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5, delay: 0.2 }}
+                          >
+                              {stat.value}
+                          </motion.h3>
+                          <motion.p 
+                              className="text-sm text-gray-700"
+                              initial={{ opacity: 0 }}
+                              whileInView={{ opacity: 1 }}
+                              transition={{ duration: 0.5, delay: 0.3 }}
+                          >
+                              {stat.label}
+                          </motion.p>
+                      </div>
+                  </motion.div>
+              ))}
+          </motion.div>
+          
+          {/* Call to Action */}
+          <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-center mt-16 sm:mt-24"
+          >
+              <div className="bg-white/40 backdrop-blur-md rounded-2xl p-8 sm:p-10 border border-white/50 shadow-xl max-w-4xl mx-auto">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Ready to discuss your project?</h3>
+                  <p className="text-gray-700 mb-8 max-w-2xl mx-auto">
+                      Let's collaborate to turn your vision into reality. Our team of experts is ready to help you create something extraordinary.
+                  </p>
+                  <motion.div
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.98 }}
+                  >
+                      <Link to="/contact" className="inline-block bg-gray-900 text-white py-3 px-8 rounded-lg font-medium shadow-lg hover:bg-gray-800 transition-colors">
+                          Contact Us
+                      </Link>
+                  </motion.div>
+              </div>
+          </motion.div>
       </div>
-    </motion.div>
-  );
+  </motion.div>
+);
 };
 
 export default Projects;

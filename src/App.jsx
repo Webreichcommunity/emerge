@@ -6,6 +6,7 @@ import ProjectDetail from "./Pages/OurProjectDetails/OurProjectDetails";
 import Projects from "./Pages/Projects/Projects";
 import Services from "./Pages/Services/Services";
 import About from "./Pages/AboutUs/About";
+import Main from "./Pages/Main";
 // import OurProjectDetails from "./Pages/OurProjectDetails/OurProjectDetails";
 
 function App() {

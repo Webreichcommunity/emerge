@@ -78,7 +78,7 @@ export default function Header() {
                             <img
                                 src="/logo.png"
                                 alt="Emerge Construction Logo"
-                                className="w-12 h-12 object-contain"
+                                className="h-12 object-contain"
                             />
                         </div>
                         <div className="flex flex-col">
