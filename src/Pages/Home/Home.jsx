@@ -13,7 +13,7 @@ const services = [
   {
     name: "Planning",
     href: "/services/planning",
-    image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+    image: "https://i.pinimg.com/1200x/74/54/04/745404d12e92abd7c73cfaac6e25d915.jpg",
     description: "Strategic planning to bring your vision to life with precision and efficiency."
   },
   {
