@@ -38,6 +38,13 @@ export default function Header() {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
         setActiveSubmenu(null);
+        
+        // Prevent body scroll when menu is open
+        if (!isMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
     };
 
     useEffect(() => {
@@ -46,7 +53,10 @@ export default function Header() {
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            document.body.style.overflow = 'auto';
+        };
     }, []);
 
     // Smooth scroll to hash element when URL changes
@@ -60,6 +70,24 @@ export default function Header() {
         }
     }, [location]);
 
+    // Close menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuButton = document.getElementById('menu-button');
+            
+            if (isMenuOpen && mobileMenu && !mobileMenu.contains(event.target) && !menuButton.contains(event.target)) {
+                setIsMenuOpen(false);
+                document.body.style.overflow = 'auto';
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isMenuOpen]);
+
     const handleHashClick = (e, href) => {
         if (href.startsWith('#')) {
             e.preventDefault();
@@ -70,6 +98,7 @@ export default function Header() {
             }
         }
         setIsMenuOpen(false);
+        document.body.style.overflow = 'auto';
     };
 
     return (
@@ -77,7 +106,7 @@ export default function Header() {
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between py-3">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center space-x-3 group">
+                    <Link to="/" className="flex items-center space-x-3 group z-50">
                         <div className="flex items-center justify-center rounded-lg overflow-hidden group-hover:scale-105 transition-transform">
                             <img
                                 src="/logo.png"
@@ -143,82 +172,114 @@ export default function Header() {
 
                     {/* Mobile Menu Button */}
                     <button
+                        id="menu-button"
                         onClick={toggleMenu}
-                        className="lg:hidden text-white hover:text-gray-300 transition-colors p-2"
+                        className="lg:hidden text-white hover:text-gray-300 transition-colors p-2 z-50"
+                        aria-label="Toggle menu"
                     >
                         {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
                 </div>
             </div>
 
+            {/* Mobile Menu Overlay */}
+            <div 
+                className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+                    isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+                }`} 
+                onClick={toggleMenu}
+            />
+
             {/* Mobile Menu */}
             <div
-                className={`fixed z-40 inset-0 bg-black transition-opacity lg:hidden ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
-                onClick={toggleMenu}
+                id="mobile-menu"
+                className={`fixed inset-y-0 left-0 max-w-xs w-4/5 bg-gradient-to-br from-gray-900 to-black shadow-2xl transition-transform duration-300 ease-in-out lg:hidden overflow-hidden z-50 ${
+                    isMenuOpen ? "translate-x-0" : "-translate-x-full"
+                }`}
+                onClick={(e) => e.stopPropagation()}
             >
-                <div
-                    className={`fixed inset-y-0 right-0 w-full max-w-sm bg-black/90 backdrop-blur-sm shadow-xl transition-transform duration-300 ease-in-out ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    <div className="flex items-center justify-between p-4 border-b border-gray-800">
+                <div className="h-full flex flex-col">
+                    {/* Mobile Menu Header */}
+                    <div className="p-5 border-b border-gray-800">
                         <div className="flex items-center space-x-3">
-                            <div className="w-10 h-10 flex items-center justify-center rounded-lg overflow-hidden">
-                                <img src="/logo.png" alt="Emerge Construction Logo" className="w-10 h-10 object-contain" />
+                            <div className="flex items-center justify-center rounded-lg overflow-hidden">
+                                <img src="/logo.png" alt="Emerge Construction Logo" className="h-10 w-10 object-contain" />
                             </div>
-                            <span className="text-lg font-bold text-white">EMERGE</span>
+                            <div className="flex flex-col">
+                                <span className="text-lg font-bold text-white">EMERGE</span>
+                                <span className="text-xs text-gray-300 tracking-widest">CONSTRUCTION</span>
+                            </div>
                         </div>
-                        <button
-                            onClick={toggleMenu}
-                            className="text-gray-300 hover:text-white transition-colors p-1"
-                        >
-                            <X className="w-6 h-6" />
-                        </button>
                     </div>
 
-                    <div className="px-4 py-6 space-y-6 overflow-y-auto max-h-[calc(100vh-5rem)]">
-                        {menuItems.map((item) => (
-                            <div key={item.name}>
-                                <div
-                                    className="flex items-center justify-between text-gray-300 hover:text-white cursor-pointer transition-colors"
-                                    onClick={() => setActiveSubmenu(activeSubmenu === item.name ? null : item.name)}
-                                >
-                                    <Link
-                                        to={item.href}
-                                        className="w-full"
-                                        onClick={(e) => handleHashClick(e, item.href)}
+                    {/* Mobile Menu Content */}
+                    <div className="flex-1 overflow-y-auto py-4">
+                        <div className="px-5 space-y-6">
+                            {menuItems.map((item) => (
+                                <div key={item.name} className="border-b border-gray-800 pb-4">
+                                    <div
+                                        className="flex items-center justify-between text-gray-100 cursor-pointer transition-colors py-2"
+                                        onClick={() => item.submenu && setActiveSubmenu(activeSubmenu === item.name ? null : item.name)}
                                     >
-                                        <span className="text-base font-medium uppercase tracking-wider">{item.name}</span>
-                                    </Link>
-                                    {item.submenu && (
-                                        <ChevronDown className={`w-5 h-5 transition-transform ${activeSubmenu === item.name ? "rotate-180" : ""}`} />
+                                        <Link
+                                            to={item.href}
+                                            className="text-base font-medium uppercase tracking-wider hover:text-white"
+                                            onClick={(e) => handleHashClick(e, item.href)}
+                                        >
+                                            {item.name}
+                                        </Link>
+                                        {item.submenu && (
+                                            <ChevronDown 
+                                                className={`w-5 h-5 transition-transform text-gray-400 ${
+                                                    activeSubmenu === item.name ? "rotate-180 text-white" : ""
+                                                }`} 
+                                            />
+                                        )}
+                                    </div>
+
+                                    {item.submenu && activeSubmenu === item.name && (
+                                        <div className="mt-2 ml-4 space-y-1 border-l-2 border-gray-700 pl-4">
+                                            {item.submenu.map((subitem) => (
+                                                <NavLink
+                                                    key={subitem.name}
+                                                    to={subitem.href}
+                                                    onClick={(e) => handleHashClick(e, subitem.href)}
+                                                    className={({ isActive }) =>
+                                                        `block py-2 text-sm transition-all hover:translate-x-1 ${
+                                                            isActive 
+                                                                ? "text-white font-medium" 
+                                                                : "text-gray-400 hover:text-white"
+                                                        }`
+                                                    }
+                                                >
+                                                    {subitem.name}
+                                                </NavLink>
+                                            ))}
+                                        </div>
                                     )}
                                 </div>
-
-                                {item.submenu && activeSubmenu === item.name && (
-                                    <div className="mt-2 ml-4 space-y-3 border-l-2 border-gray-700 pl-3">
-                                        {item.submenu.map((subitem) => (
-                                            <NavLink
-                                                key={subitem.name}
-                                                to={subitem.href}
-                                                onClick={(e) => handleHashClick(e, subitem.href)}
-                                                className={({ isActive }) =>
-                                                    `block py-2 text-sm ${isActive ? "text-white font-medium" : "text-gray-400 hover:text-white"}`
-                                                }
-                                            >
-                                                {subitem.name}
-                                            </NavLink>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
 
-                    <div className="border-t border-gray-800 p-4">
+                    {/* Search Bar in Mobile Menu */}
+                    <div className="px-5 py-4 border-t border-gray-800">
+                        <div className="relative">
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                className="w-full bg-gray-800 rounded-md py-2.5 pl-10 pr-4 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-600"
+                            />
+                            <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
+                        </div>
+                    </div>
+
+                    {/* Mobile Menu Footer */}
+                    <div className="px-5 py-4 border-t border-gray-800 mt-auto">
                         <NavLink
                             to="#contact"
-                            className="block w-full px-5 py-3 text-center font-medium text-black bg-white rounded-md hover:bg-gray-200 transition-colors"
-                            onClick={toggleMenu}
+                            onClick={(e) => handleHashClick(e, "#contact")}
+                            className="block w-full px-4 py-3 text-center font-medium text-black bg-white rounded-md hover:bg-gray-200 transition-colors"
                         >
                             Inquire Now
                         </NavLink>

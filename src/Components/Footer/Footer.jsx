@@ -23,7 +23,7 @@ const Footer = () => {
                         </p>
                         <div className="flex items-center space-x-2 text-sm text-gray-400">
                             <Clock className="w-4 h-4" />
-                            <span>Mon-Sat: 8:00 AM - 6:00 PM</span>
+                            <span>Mon-Sat: 11:00 AM - 7:00 PM</span>
                         </div>
 
                         {/* Social Links */}
@@ -89,30 +89,44 @@ const Footer = () => {
                         <h3 className="text-stone-400 font-semibold text-lg mb-4">Projects</h3>
                         <ul className="space-y-3">
                             <li>
-                                <Link to="/case-studies/webreich-business-solutions" className="hover:text-stone-600 transition-colors">
-                                TechHub Innovation Center
+                                <Link to="/ourwork/prathamesh-sakarkar" className="hover:text-stone-600 transition-colors">
+                                Mr. Prathamesh Sakarkar
 
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/case-studies" className="hover:text-stone-600 transition-colors">
-                                Oceanview Luxury Residences
-
+                                <Link to="/ourwork/saurabh-wakode" className="hover:text-stone-600 transition-colors">
+                                Mr. Saurabh Wakode
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/ourwork" className="hover:text-stone-600 transition-colors">
-                                Greenfield Corporate Campus
+                                <Link to="/ourwork/balkrishna-thokal" className="hover:text-stone-600 transition-colors">
+                                Mr. Balkrishna Thokal
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/ourwork/webreichcommunity" className="hover:text-stone-600 transition-colors">
-                                Heritage Museum Renovation
+                                <Link to="/ourwork/dk-sakarkar-llp" className="hover:text-stone-600 transition-colors">
+                                D.K. Sakarkar LLP
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/ourwork/webreichcommunity" className="hover:text-stone-600 transition-colors">
-                                Urban Wellness Center
+                                <Link to="/ourwork/ganesh-magar" className="hover:text-stone-600 transition-colors">
+                                Mr. Ganesh Magar
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/ourwork/ajay-lagad" className="hover:text-stone-600 transition-colors">
+                                Mr. Ajay Lagad
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/ourwork/emerge-construction-office" className="hover:text-stone-600 transition-colors">
+                                Emerge Construction Office
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/ourwork/arvind-yadav" className="hover:text-stone-600 transition-colors">
+                                Mr. Arvind Yadav
                                 </Link>
                             </li>
                         </ul>
