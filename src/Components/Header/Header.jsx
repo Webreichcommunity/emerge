@@ -15,11 +15,15 @@ const menuItems = [
         name: "Our Work",
         href: "#projects",
         submenu: [
-            { name: "TechHub Innovation Center", href: "/ourwork/techhub-innovation-center" },
-            { name: "Oceanview Luxury Residences", href: "/ourwork/oceanview-luxury-residences" },
-            { name: "Greenfield Corporate Campus", href: "/ourwork/greenfield-corporate-campus" },
-            { name: "Heritage Museum Renovation", href: "/ourwork/heritage-museum-renovation" },
-            { name: "Urban Wellness Center", href: "/ourwork/urban-wellness-center" }
+            { name: "Mr. Prathamesh Sakarkar", href: "/ourwork/prathamesh-sakarkar" },
+            { name: "Mr. Saurabh Wakode", href: "/ourwork/saurabh-wakode" },
+            { name: "D.K. Sakarkar LLP", href: "/ourwork/dk-sakarkar-llp" },
+            { name: "Mr. Balkrishna Thokal", href: "/ourwork/balkrishna-thokal" },
+            { name: "Mr. Ganesh Magar", href: "/ourwork/ganesh-magar" },
+            { name: "Mr. Ajay Lagad", href: "/ourwork/ajay-lagad" },
+            { name: "Mr. Aditya Sawalka", href: "/ourwork/" },
+            { name: "Emerge Construction Office", href: "/ourwork/emerge-construction-office" },
+            { name: "Mr. Arvind Yadav", href: "/ourwork/arvind-yadav" },
         ]
     },
     { name: "About Us", href: "#about" },
@@ -149,7 +153,7 @@ export default function Header() {
 
             {/* Mobile Menu */}
             <div
-                className={`fixed z-40 inset-0 bg-black/80 transition-opacity lg:hidden ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
+                className={`fixed z-40 inset-0 bg-black transition-opacity lg:hidden ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"}`}
                 onClick={toggleMenu}
             >
                 <div

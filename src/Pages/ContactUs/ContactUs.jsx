@@ -34,7 +34,7 @@ const ContactForm = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          access_key: 'YOUR_WEB3FORMS_ACCESS_KEY', // Replace with your actual key
+          access_key: '49dfa941-0704-4a4a-9210-872f1bb719c0', // Replace with your actual key
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
@@ -254,7 +254,7 @@ const ContactForm = () => {
                         value={formData.name}
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none text-stone-800 placeholder-stone-400 transition-all duration-200"
-                        placeholder="John Doe"
+                        placeholder="Enter Your Name"
                         required
                         whileFocus={inputVariants.focus}
                       />
@@ -263,7 +263,7 @@ const ContactForm = () => {
 
                   <motion.div variants={cardVariants} className="relative">
                     <label htmlFor="email" className="block text-sm font-medium text-stone-700 mb-1">
-                      Email Address
+                      Email Address <span className="text-stone-400">(Optional)</span>
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -276,7 +276,7 @@ const ContactForm = () => {
                         value={formData.email}
                         onChange={handleChange}
                         className="w-full pl-10 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none text-stone-800 placeholder-stone-400 transition-all duration-200"
-                        placeholder="john@example.com"
+                        placeholder="shriyash@example.com"
                         required
                         whileFocus={inputVariants.focus}
                       />
@@ -286,7 +286,7 @@ const ContactForm = () => {
 
                 <motion.div variants={cardVariants} className="relative">
                   <label htmlFor="phone" className="block text-sm font-medium text-stone-700 mb-1">
-                    Phone Number <span className="text-stone-400">(Optional)</span>
+                    Phone Number 
                   </label>
                   <div className="relative">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -299,7 +299,7 @@ const ContactForm = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full pl-10 pr-4 py-3 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none text-stone-800 placeholder-stone-400 transition-all duration-200"
-                      placeholder="+1 (555) 123-4567"
+                      placeholder="+91 888 888 8888"
                       whileFocus={inputVariants.focus}
                     />
                   </div>
@@ -378,15 +378,15 @@ const ContactForm = () => {
                 className="flex items-center justify-center space-x-2 hover:text-stone-800 transition-colors"
               >
                 <FiMail className="h-5 w-5" />
-                <span>hello@example.com</span>
+                <span>emergeconstructionconsultants@gmail.com</span>
               </motion.a>
               <motion.a 
-                href="tel:+15551234567"
+                href="tel:+918698165330"
                 whileHover={{ y: -2 }}
                 className="flex items-center justify-center space-x-2 hover:text-stone-800 transition-colors"
               >
                 <FiPhone className="h-5 w-5" />
-                <span>+1 (555) 123-4567</span>
+                <span>+91 (869) 816 5330 / +91 (774) 580 3646</span>
               </motion.a>
             </div>
           </motion.div>

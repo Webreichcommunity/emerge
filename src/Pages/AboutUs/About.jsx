@@ -36,9 +36,9 @@ function About() {
             fullBio: "With expertise in structural design and analysis, Purvesh brings innovative engineering solutions to our most complex projects. His leadership ensures all structures exceed safety standards while maintaining architectural integrity.",
             quote: "Engineering isn't just about calculations—it's about creating structures that elevate human experience.",
             stats: [
-                { value: "5+", label: "Years Exp.", color: "bg-orange-500" },
-                { value: "M.E", label: "Civil Eng.", color: "bg-red-500" },
-                { value: "30+", label: "Projects", color: "bg-pink-500" }
+                { value: "5+", label: "Years Exp." },
+                { value: "M.E", label: "Civil Eng." },
+                { value: "30+", label: "Projects" }
             ]
         },
         {
@@ -50,16 +50,16 @@ function About() {
             fullBio: "Bhushan specializes in sustainable construction practices and eco-friendly design. His innovative approach to civil engineering has earned our company multiple green building certifications and industry recognition.",
             quote: "The best engineering solutions work with nature, not against it—balancing progress with preservation.",
             stats: [
-                { value: "5+", label: "Years Exp.", color: "bg-blue-500" },
-                { value: "B.E", label: "Civil", color: "bg-indigo-500" },
-                { value: "5+", label: "Awards", color: "bg-purple-500" }
+                { value: "5+", label: "Years Exp." },
+                { value: "B.E", label: "Civil" },
+                { value: "5+", label: "Awards" }
             ]
         }
     ];
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100" id='about'>
-            {/* Hero Section with Modern Design */}
+            {/* Hero Section with Clean Professional Design */}
             <motion.div 
                 className="relative py-16 md:py-24 bg-gradient-to-r from-gray-900 to-stone-800 overflow-hidden"
                 initial="hidden"
@@ -69,39 +69,25 @@ function About() {
             >
                 <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
                     <motion.h1 
-                        className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6"
+                        className="text-3xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6"
                         variants={fadeIn}
                     >
                         Building Dreams, <span className="text-stone-400">Crafting Reality</span>
                     </motion.h1>
                     <motion.p 
-                        className="text-lg md:text-xl text-stone-200 opacity-90 max-w-3xl mx-auto"
+                        className="text-lg md:text-xl text-stone-200 max-w-3xl mx-auto"
                         variants={fadeIn}
                     >
                         With over 5 years of excellence in construction, we transform visions into lasting structures.
                     </motion.p>
                 </div>
                 
-                {/* Abstract background elements */}
-                <motion.div 
-                    className="absolute top-0 right-0 w-64 h-64 rounded-full bg-stone-500 opacity-20 -mr-32 -mt-32"
-                    animate={{ 
-                        scale: [1, 1.2, 1],
-                        opacity: [0.2, 0.3, 0.2]
-                    }}
-                    transition={{ 
-                        duration: 8,
-                        repeat: Infinity,
-                        repeatType: "reverse"
-                    }}
-                />
-                
-                {/* Decorative element */}
-                <div className="absolute bottom-0 left-0 w-full h-12 md:h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
+                {/* Subtle decorative element without shadow */}
+                {/* <div className="absolute bottom-0 left-0 w-full h-12 md:h-16 bg-gradient-to-t from-gray-50 to-transparent"></div> */}
             </motion.div>
 
-            {/* Content Section with Clean Design */}
-            <div className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+            {/* Content Section with Refined Design */}
+            <div className="py-12 md:py-16 px-4 sm:px-6 lg:px-8">
                 <div className="container mx-auto max-w-6xl">
                     <motion.div 
                         className="flex flex-col md:flex-row items-center gap-8 md:gap-16"
@@ -110,19 +96,19 @@ function About() {
                         viewport={{ once: true, margin: "-100px" }}
                         variants={staggerChildren}
                     >
-                        {/* Image Section */}
+                        {/* Image Section with Refined Styling */}
                         <motion.div 
                             className="w-full md:w-5/12 relative mb-8 md:mb-0"
                             variants={fadeIn}
                         >
-                            <div className="absolute inset-0 bg-gradient-to-r from-stone-600 to-stone-800 rounded-xl transform rotate-2 scale-105 shadow-2xl"></div>
+                            <div className="absolute inset-0 bg-stone-700 rounded-xl transform rotate-2 scale-105"></div>
                             <img
                                 src="/nande.JPG"
                                 alt="Construction Professional"
-                                className="relative w-full h-full object-cover rounded-xl border-4 border-white shadow-xl z-10"
+                                className="relative w-full h-full object-cover rounded-xl border-2 border-white z-10"
                             />
                             <motion.div 
-                                className="absolute -bottom-4 -right-4 bg-stone-600 text-white px-4 py-2 rounded-lg shadow-lg z-20 text-sm font-bold"
+                                className="absolute -bottom-4 -right-4 bg-stone-800 text-white px-4 py-2 rounded-md z-20 text-sm font-bold"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
@@ -130,27 +116,27 @@ function About() {
                             </motion.div>
                         </motion.div>
 
-                        {/* About Text */}
+                        {/* About Text with Refined Design */}
                         <motion.div 
                             className="w-full md:w-7/12 space-y-6"
                             variants={fadeIn}
                         >
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-                                <span className="text-stone-600">About</span> Our Company
+                                <span className="text-stone-700">About</span> Our Company
                             </h2>
 
-                            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                                Founded in 2020, <span className="font-semibold text-stone-600">Premier Construction</span> has been at the forefront of construction excellence, delivering high-quality residential and commercial projects across the region.
+                            <p className="text-lg text-gray-700 leading-relaxed">
+                                Founded in 2020, <span className="font-semibold text-stone-700">Premier Construction</span> has been at the forefront of construction excellence, delivering high-quality residential and commercial projects across the region.
                             </p>
 
-                            {/* Mission & Vision with Read More */}
+                            {/* Mission & Vision with Refined Design */}
                             <motion.div 
-                                className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border-l-4 border-stone-600"
-                                whileHover={{ boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                                className="bg-white p-6 rounded-lg border-l-4 border-stone-700 shadow-md"
+                                whileHover={{ y: -5 }}
                                 transition={{ duration: 0.3 }}
                             >
                                 <h3 className="text-2xl font-semibold text-gray-800 mb-4">Our Mission & Vision</h3>
-                                <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+                                <p className="text-gray-700 text-base leading-relaxed">
                                     {showFullMission ? (
                                         <>
                                             To build sustainable, safe, and aesthetically pleasing structures while maintaining the highest standards of quality and client satisfaction. We aim to be the region's most trusted construction partner, known for integrity, innovation, and excellence in every project we undertake. Our vision encompasses creating spaces that positively impact communities while embracing cutting-edge construction technologies.
@@ -162,7 +148,7 @@ function About() {
                                     )}
                                 </p>
                                 <motion.button
-                                    className="mt-4 text-stone-700 text-base font-medium flex items-center hover:text-stone-800 group"
+                                    className="mt-4 text-stone-800 text-base font-medium flex items-center hover:text-stone-600 group"
                                     onClick={() => setShowFullMission(!showFullMission)}
                                     whileHover={{ scale: 1.03 }}
                                     whileTap={{ scale: 0.97 }}
@@ -180,7 +166,7 @@ function About() {
                         </motion.div>
                     </motion.div>
 
-                    {/* Engineers Section - Modern Card Design */}
+                    {/* Engineers Section - Professional Card Design with Stone/Gray Color Scheme */}
                     <motion.div 
                         className="mt-16 md:mt-20"
                         initial="hidden"
@@ -192,21 +178,18 @@ function About() {
                             className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10 md:mb-12"
                             variants={fadeIn}
                         >
-                            <span className="text-stone-600">Meet</span> Our Lead Engineers
+                            <span className="text-stone-700">Meet</span> Our Lead Engineers
                         </motion.h2>
 
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                             {engineers.map((engineer) => (
                                 <motion.div 
                                     key={engineer.id}
-                                    className="relative rounded-2xl overflow-hidden group"
+                                    className="bg-white rounded-lg overflow-hidden shadow-lg border border-gray-100"
                                     variants={fadeIn}
-                                    whileHover={{ y: -8 }}
+                                    whileHover={{ y: -8, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
                                     transition={{ duration: 0.3 }}
                                 >
-                                    {/* Glassy Card Background */}
-                                    <div className="absolute inset-0 bg-white/20 backdrop-blur-lg border border-white/30 rounded-2xl shadow-xl"></div>
-                                    
                                     <div className="relative h-64">
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 z-10"></div>
                                         <img
@@ -215,19 +198,19 @@ function About() {
                                             className="w-full h-full object-cover object-center"
                                         />
                                         <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20">
-                                            <h3 className="text-2xl font-bold mb-1 drop-shadow-lg">{engineer.name}</h3>
-                                            <p className="text-base font-medium bg-white/20 backdrop-blur-sm inline-block px-4 py-1 rounded-full border border-white/30">
+                                            <h3 className="text-2xl font-bold mb-1">{engineer.name}</h3>
+                                            <p className="text-sm font-medium bg-stone-800/80 inline-block px-3 py-1 rounded-full">
                                                 {engineer.title}
                                             </p>
                                         </div>
                                     </div>
                                     
-                                    <div className="p-6 relative z-10">
+                                    <div className="p-6">
                                         <div className="flex flex-wrap gap-3 mb-4">
                                             {engineer.stats.map((stat, index) => (
                                                 <div 
                                                     key={index} 
-                                                    className={`${stat.color} text-white px-4 py-2 rounded-lg shadow-md text-center min-w-[80px]`}
+                                                    className={`${index % 2 === 0 ? 'bg-stone-700' : 'bg-gray-800'} text-white px-3 py-2 rounded-md text-center min-w-[80px]`}
                                                 >
                                                     <span className="font-bold text-lg">{stat.value}</span>
                                                     <p className="text-xs font-medium">{stat.label}</p>
@@ -235,31 +218,31 @@ function About() {
                                             ))}
                                         </div>
                                         
-                                        <p className="text-gray-800 text-base mb-4">
+                                        <p className="text-gray-700 text-base mb-4 leading-relaxed">
                                             {expandedCard === engineer.id ? engineer.fullBio : engineer.shortBio}
                                         </p>
                                         
                                         {expandedCard === engineer.id && (
                                             <motion.div 
-                                                className="mt-4 pt-4 border-t border-white/30"
+                                                className="mt-4 pt-4 border-t border-gray-200"
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
                                                 transition={{ duration: 0.3 }}
                                             >
-                                                <p className="italic text-gray-700 text-base">
+                                                <p className="italic text-stone-700 text-base">
                                                     "{engineer.quote}"
                                                 </p>
                                             </motion.div>
                                         )}
                                         
                                         <motion.button
-                                            className="mt-4 text-stone-700 text-base font-medium flex items-center hover:text-stone-800 group"
+                                            className="mt-4 text-stone-700 text-base font-medium flex items-center hover:text-stone-900"
                                             onClick={() => setExpandedCard(expandedCard === engineer.id ? null : engineer.id)}
                                             whileHover={{ scale: 1.03 }}
                                             whileTap={{ scale: 0.97 }}
                                         >
                                             {expandedCard === engineer.id ? 'Show Less' : 'Read More'}
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 {expandedCard === engineer.id ? (
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
                                                 ) : (
