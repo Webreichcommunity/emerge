@@ -16,11 +16,11 @@ export const ourProjects = [
         "totalCost": "$10M",
         "projectType": "Technology",
         "tags": ["Commercial", "Innovation", "Tech"],
-        "mainImage": "/prathamesh/mainimage.JPG",
+        "mainImage": "/ProjectsImage/prathamesh/mainimage.JPG",
         "gallery": [
-            "/prathamesh/img1.JPG",
-            "/prathamesh/img2.JPG",
-            "/prathamesh/img3.JPG"
+            "/ProjectsImage/prathamesh/img1.JPG",
+            "/ProjectsImage/prathamesh/img2.JPG",
+            "/ProjectsImage/prathamesh/img3.JPG",
         ],
         "testimonial": {
             "quote": "The team delivered beyond our expectations with innovative solutions.",
@@ -43,8 +43,12 @@ export const ourProjects = [
         "address": "Jamthi Kh, Murtizapur-Karanja Road, Tq. Murtizapur, Dist. Akola",
         "projectType": "Bungalow",
         "tags": ["Residential", "Luxury", "Modern Living"],
-        "mainImage": "/saurabh/img1.JPG",
-        "gallery": ["/saurabh/img1.JPG"],
+        "mainImage": "/ProjectsImage/saurabh/mainimg.jpg",
+        "gallery": [
+            "/ProjectsImage/saurabh/img1.jpg",
+            "/ProjectsImage/saurabh/img2.jpg",
+            "/ProjectsImage/saurabh/img3.jpg",
+        ],
         "testimonial": {
           "quote": "A dream home that reflects our personality and lifestyle.",
           "author": "Saurabh Wakode",
@@ -66,8 +70,12 @@ export const ourProjects = [
         "address": "APMC Market, Akola",
         "projectType": "Office",
         "tags": ["Commercial", "Office", "Modern Workspace"],
-        "mainImage": "/dk/img1.JPG",
-        "gallery": ["/dk/img1.JPG"],
+        "mainImage": "/ProjectsImage/sawalkar/mainimg.JPG",
+        "gallery": [
+            "/ProjectsImage/sawalkar/img1.JPG",
+            "/ProjectsImage/sawalkar/img2.JPG",
+            "/ProjectsImage/sawalkar/img3.JPG",
+        ],
         "testimonial": {
           "quote": "The workspace has truly elevated our business image and efficiency.",
           "author": "D.K. Sakarkar",
@@ -89,8 +97,10 @@ export const ourProjects = [
         "address": "Palso Badhe, Akola",
         "projectType": "House",
         "tags": ["Residential", "Family Home", "Bungalow"],
-        "mainImage": "/balkrishna/img1.JPG",
-        "gallery": ["/balkrishna/img1.JPG"],
+        "mainImage": "/ProjectsImage/balkrishna/mainimg.jpg",
+        "gallery": [
+            "/ProjectsImage/balkrishna/img1.jpg",
+        ],
         "testimonial": {
           "quote": "A perfect family space that blends simplicity and beauty.",
           "author": "Balkrishna Thokal",
@@ -112,8 +122,10 @@ export const ourProjects = [
         "address": "Zabaji Maharaj Mandir Road, Kaulkhed Chowk, Kaulkhed, Akola",
         "projectType": "Bungalow",
         "tags": ["Residential", "Bungalow", "Peaceful Living"],
-        "mainImage": "/ganesh/img1.JPG",
-        "gallery": ["/ganesh/img1.JPG"],
+       "mainImage": "/ProjectsImage/ganesh/mainimg.jpg",
+        "gallery": [
+            "/ProjectsImage/ganesh/img1.jpg",
+        ],
         "testimonial": {
           "quote": "A home we always envisioned, now brought to life beautifully.",
           "author": "Ganesh Magar",
@@ -135,8 +147,11 @@ export const ourProjects = [
         "address": "Gokul Colony, near Post Office, Krushi Nagar, Akola",
         "projectType": "Compact Home",
         "tags": ["Residential", "Compact", "Urban Living"],
-        "mainImage": "/ajay/img1.JPG",
-        "gallery": ["/ajay/img1.JPG"],
+        "mainImage": "/ProjectsImage/lagad/mainimg.JPG",
+        "gallery": [
+          "/ProjectsImage/lagad/img1.JPG",
+          "/ProjectsImage/lagad/img2.JPG",
+        ],
         "testimonial": {
           "quote": "Smart design made our limited space feel expansive and cozy.",
           "author": "Ajay Lagad",
@@ -152,14 +167,18 @@ export const ourProjects = [
         "client": "Aditya Sawalka",
         "year": "2024",
         "timeline": "5 Months",
-        "category": "Residential (Interior)",
+        "category": "Residential",
         "totalArea": "950 Sq.Ft.",
         "budget": "₹7,00,000",
         "address": "Maa Vaishnavi Park, Sudhir Colony, Akola",
         "projectType": "Interior Design",
         "tags": ["Residential", "Interior", "Modern Design"],
-        "mainImage": "/aditya/img1.JPG",
-        "gallery": ["/aditya/img1.JPG"],
+        "mainImage": "/ProjectsImage/sawalkar/mainimg.JPG",
+        "gallery": [
+          "/ProjectsImage/sawalkar/img1.JPG",
+          "/ProjectsImage/sawalkar/img2.JPG",
+          "/ProjectsImage/sawalkar/img3.JPG",
+        ],
         "testimonial": {
           "quote": "Excellent transformation! The interiors feel both elegant and personalized.",
           "author": "Aditya Sawalka",
@@ -181,8 +200,11 @@ export const ourProjects = [
         "address": "Akola",
         "projectType": "Office",
         "tags": ["Commercial", "Compact", "Corporate"],
-        "mainImage": "/emerge/img1.JPG",
-        "gallery": ["/emerge/img1.JPG"],
+        "mainImage": "/ProjectsImage/emergeconstruction/mainimg.JPG",
+        "gallery": [
+          "/ProjectsImage/emergeconstruction/img1.JPG",
+          "/ProjectsImage/emergeconstruction/img2.JPG",
+        ],
         "testimonial": {
           "quote": "Perfectly planned and professionally executed—our office now matches our brand vision.",
           "author": "Emerge Construction Team",
@@ -198,14 +220,18 @@ export const ourProjects = [
         "client": "Arvind Yadav",
         "year": "2024",
         "timeline": "6 Months",
-        "category": "Interior Designing",
+        "category": "Residential",
         "totalArea": "850 Sq.Ft.",
         "budget": "₹15,00,000",
         "address": "Akola",
         "projectType": "Interior Design",
         "tags": ["Interior", "Luxury", "Residential"],
-        "mainImage": "/arvind/img1.JPG",
-        "gallery": ["/arvind/img1.JPG"],
+        "mainImage": "/ProjectsImage/yadav/mainimg.jpg",
+        "gallery": [
+          "/ProjectsImage/yadav/img1.jpg",
+          "/ProjectsImage/yadav/img2.jpg",
+          "/ProjectsImage/yadav/img3.jpg",
+        ],
         "testimonial": {
           "quote": "Absolutely stunning design work—stylish, cozy, and practical!",
           "author": "Arvind Yadav",
