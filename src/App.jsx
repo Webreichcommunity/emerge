@@ -8,6 +8,7 @@ import Projects from "./Pages/Projects/Projects";
 import Services from "./Pages/Services/Services";
 import About from "./Pages/AboutUs/About";
 import Main from "./Pages/Main";
+import ContactForm from "./Pages/ContactUs/ContactUs";
 // import OurProjectDetails from "./Pages/OurProjectDetails/OurProjectDetails";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="services" element={<Services />} />
+            <Route path="contact" element={<ContactForm />} />
             <Route path="about" element={<About />} />
             <Route path="ourwork" element={<Projects />} />
             <Route path="ourwork/:slug" element={<ProjectDetail />} />

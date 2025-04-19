@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { ourProjects } from '../../Data/OurProjects';
 import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Projects = () => {
     // For viewport detection
@@ -592,7 +593,7 @@ const Projects = () => {
                 >
                     {[
                         { 
-                            value: "50+", 
+                            value: "30+", 
                             label: "Projects Completed", 
                             icon: (
                               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -601,7 +602,7 @@ const Projects = () => {
                       ),
                   },
                   { 
-                      value: "12+", 
+                      value: "5+", 
                       label: "Years of Experience", 
                       icon: (
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -676,9 +677,9 @@ const Projects = () => {
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.98 }}
                   >
-                      <Link to="/contact" className="inline-block bg-gray-900 text-white py-3 px-8 rounded-lg font-medium shadow-lg hover:bg-gray-800 transition-colors">
+                      <NavLink to="#contact" className="inline-block bg-gray-900 text-white py-3 px-8 rounded-lg font-medium shadow-lg hover:bg-gray-800 transition-colors">
                           Contact Us
-                      </Link>
+                      </NavLink>
                   </motion.div>
               </div>
           </motion.div>

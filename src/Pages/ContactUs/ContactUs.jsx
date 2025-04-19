@@ -142,7 +142,7 @@ const ContactForm = () => {
 
   return (
     <div 
-      className="relative py-16 px-4 sm:px-6 lg:px-8 overflow-hidden text-gray-900"
+      className="relative py-16 pt-10 px-4 sm:px-6 lg:px-8 overflow-hidden text-gray-900"
       style={{ 
         background: `
           radial-gradient(circle at 70% 80%, rgba(214, 211, 209, 0.5) 0%, transparent 25%),
