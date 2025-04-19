@@ -7,6 +7,7 @@ import Stats from '../Stats/Stats';
 import Projects from '../Projects/Projects';
 import Contactform from '../ContactUs/ContactUs';
 import About from '../AboutUs/About';
+import { NavLink } from 'react-router-dom';
 
 const services = [
   {
@@ -142,9 +143,8 @@ const Home = () => {
           <button
             key={index}
             onClick={() => handleDotClick(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentIndex ? "bg-white w-6" : "bg-white/30"
-            }`}
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? "bg-white w-6" : "bg-white/30"
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
@@ -218,12 +218,12 @@ const Home = () => {
                         whileHover="hover"
                         whileTap="tap"
                       >
-                        <Link
-                          to={services[currentIndex].href}
+                        <NavLink
+                          to="#projects"
                           className="inline-block px-6 py-3 bg-white text-gray-900 font-medium rounded-lg transition-all"
                         >
                           Explore Our Work
-                        </Link>
+                        </NavLink>
                       </motion.div>
                       <motion.div
                         variants={buttonVariants}
@@ -231,12 +231,12 @@ const Home = () => {
                         whileHover="hover"
                         whileTap="tap"
                       >
-                        <Link
-                          to="/contact"
+                        <NavLink
+                          to="#contact"
                           className="inline-block px-6 py-3 bg-transparent border border-white text-white font-medium rounded-lg transition-all hover:bg-white/10"
                         >
                           Get Quote
-                        </Link>
+                        </NavLink>
                       </motion.div>
                     </motion.div>
                   </motion.div>
