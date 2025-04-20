@@ -37,7 +37,7 @@ function About() {
             quote: "Engineering isn't just about calculations—it's about creating structures that elevate human experience.",
             stats: [
                 { value: "5+", label: "Years Exp." },
-                { value: "M.E", label: "Civil Eng." },
+                { value: "M.E", label: "Structural Eng." },
                 { value: "30+", label: "Projects" }
             ]
         },
