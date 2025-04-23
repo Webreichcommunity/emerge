@@ -98,8 +98,7 @@ const Footer = () => {
                         <div className="space-y-5">
                             <div className="bg-gray-900 rounded-lg p-4 shadow-md">
                                 <p className="text-gray-300">
-                                    <span className="text-white font-medium block mb-2">Sopinath Bhavan</span>
-                                    Mangrulpir Road, Opp. Sagar Furniture<br />
+                                'Sopinath Bhavan' Mangrulpir Road, Opp. Sagar Furniture<br />
                                     Kaulkhed Chowk, Akola
                                 </p>
                             </div>

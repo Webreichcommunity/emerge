@@ -60,7 +60,7 @@ function SplashScreen() {
           </span>
         </h1>
         <h2 className="text-3xl font-semibold text-gray-300 animate-[slideInFromBottom_0.8s_ease-out_0.8s_both]">
-          CONSTRUCTION
+          CONSTRUCTION CONSULTANTS
         </h2>
       </div>
       <style jsx global>{`
