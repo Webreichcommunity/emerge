@@ -386,7 +386,7 @@ const ContactForm = () => {
                 className="flex items-center justify-center space-x-2 hover:text-stone-800 transition-colors"
               >
                 <FiPhone className="h-5 w-5" />
-                <span>+91 (869) 816 5330 / +91 (774) 580 3646</span>
+                <span>+91 8698165330 / +91 7745803646</span>
               </motion.a>
             </div>
           </motion.div>

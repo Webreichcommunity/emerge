@@ -30,7 +30,7 @@ function About() {
         {
             id: 1,
             name: "Er. Purvesh R. Sakarkar",
-            title: "Civil Engineer",
+            title: "Co-Founder",
             image: "/nande.JPG",
             shortBio: "Structural design expert bringing innovative engineering solutions to complex projects.",
             fullBio: "With expertise in structural design and analysis, Purvesh brings innovative engineering solutions to our most complex projects. His leadership ensures all structures exceed safety standards while maintaining architectural integrity.",
@@ -44,7 +44,7 @@ function About() {
         {
             id: 2,
             name: "Er. Bhushan V. Kale",
-            title: "Civil Engineer",
+            title: "Co-Founder",
             image: "/nande.JPG",
             shortBio: "Sustainable construction specialist with focus on eco-friendly design practices.",
             fullBio: "Bhushan specializes in sustainable construction practices and eco-friendly design. His innovative approach to civil engineering has earned our company multiple green building certifications and industry recognition.",
@@ -122,11 +122,11 @@ function About() {
                             variants={fadeIn}
                         >
                             <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
-                                <span className="text-stone-700">About</span> Our Company
+                                <span className="text-stone-700">About</span> Our Firm
                             </h2>
 
                             <p className="text-lg text-gray-700 leading-relaxed">
-                                Founded in 2020, <span className="font-semibold text-stone-700">Premier Construction</span> has been at the forefront of construction excellence, delivering high-quality residential and commercial projects across the region.
+                                Founded in 2020, <span className="font-semibold text-stone-700">Emerge Construction </span> has been at the forefront of construction excellence, delivering high-quality residential and commercial projects across the region.
                             </p>
 
                             {/* Mission & Vision with Refined Design */}
@@ -206,17 +206,7 @@ function About() {
                                     </div>
                                     
                                     <div className="p-6">
-                                        <div className="flex flex-wrap gap-3 mb-4">
-                                            {engineer.stats.map((stat, index) => (
-                                                <div 
-                                                    key={index} 
-                                                    className={`${index % 2 === 0 ? 'bg-stone-700' : 'bg-gray-800'} text-white px-3 py-2 rounded-md text-center min-w-[80px]`}
-                                                >
-                                                    <span className="font-bold text-lg">{stat.value}</span>
-                                                    <p className="text-xs font-medium">{stat.label}</p>
-                                                </div>
-                                            ))}
-                                        </div>
+                                       
                                         
                                         <p className="text-gray-700 text-base mb-4 leading-relaxed">
                                             {expandedCard === engineer.id ? engineer.fullBio : engineer.shortBio}
@@ -249,6 +239,8 @@ function About() {
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                                 )}
                                             </svg>
+
+                                            
                                         </motion.button>
                                     </div>
                                 </motion.div>
